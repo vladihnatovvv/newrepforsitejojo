@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AVOE Preview</title>
+    <title>JoJo Hats Preview</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./wp-content/themes/jojo-avoe/assets/css/main.css" />
   </head>
-  <body>
-    <div class="site-shell">
+  <body class="editorial-theme editorial-theme--home">
+    <div class="site-shell site-shell--editorial">
       <header class="site-header">
         <div class="container site-header__row">
           <a class="brand-mark" href="./index.html"><span class="brand-mark__icon">A</span><span class="brand-mark__text">AVOE</span></a>
@@ -49,16 +49,16 @@
             <ul class="woocommerce-mini-cart">
               <li class="woocommerce-mini-cart-item">
                 <div class="product-card__media product-card__media--1" style="min-height:72px"></div>
-                <div><strong>Muse Mini</strong><div>1 × 4 890 ₴</div></div>
+                <div><strong>Панама Жак Мюс</strong><div>1 × 890 ₴</div></div>
               </li>
               <li class="woocommerce-mini-cart-item">
                 <div class="product-card__media product-card__media--2" style="min-height:72px"></div>
-                <div><strong>Linea Tote</strong><div>1 × 5 690 ₴</div></div>
+                <div><strong>Панама Лезо</strong><div>1 × 950 ₴</div></div>
               </li>
             </ul>
           </div>
           <div class="mini-cart__footer">
-            <div class="mini-cart__total"><span>Всього</span><div class="mini-cart__total-value">10 580 ₴</div></div>
+              <div class="mini-cart__total"><span>Всього</span><div class="mini-cart__total-value">1 840 ₴</div></div>
             <div class="mini-cart__cta">
               <a class="button button--ghost" href="./cart.html">До кошика</a>
               <a class="button" href="./checkout.html">Оформити замовлення</a>
@@ -68,56 +68,69 @@
       </aside>
 
       <main id="primary" class="site-main">
-        <section class="hero">
-          <div class="container hero__grid">
-            <div class="hero__content">
-              <span class="hero__eyebrow">Нова колекція</span>
-              <h1>Мінімалістичні сумки та аксесуари</h1>
-              <p>Елегантні моделі преміум якості для тих, хто цінує стиль, функціональність і чіткий сервіс.</p>
-              <div class="hero__actions">
-                <a class="button" href="./catalog.html">Переглянути колекцію</a>
-                <a class="button button--ghost" href="#about">Дізнатися більше</a>
+        <section class="editorial-hero">
+          <div class="editorial-hero__media" aria-hidden="true"></div>
+          <div class="editorial-hero__overlay"></div>
+          <div class="container editorial-hero__inner">
+            <div class="editorial-hero__header">
+              <div class="editorial-hero__brand">JoJo Studio</div>
+              <nav class="editorial-nav">
+                <a href="./index.html">Main</a>
+                <a href="./catalog.html">Catalog</a>
+                <a href="#contacts">Contacts</a>
+              </nav>
+              <div class="editorial-hero__meta">
+                <span>UAH</span>
+                <span>Search</span>
+                <span>Cart</span>
               </div>
             </div>
-            <div class="hero__visual" aria-hidden="true">
-              <div class="hero-bag hero-bag--large"></div>
-              <div class="hero-bag hero-bag--small"></div>
+            <div class="editorial-hero__content">
+              <p class="editorial-hero__eyebrow">Summer headwear collection</p>
+              <h1>Elevating Everyday Looks With Editorial Panama Shapes</h1>
+              <p>Легкі панами з котону та деніму, чистий luxury-візуал і ready-to-sell структура під WooCommerce, доставку та CRM.</p>
+              <div class="editorial-hero__actions">
+                <a class="button button--light" href="./catalog.html">Shop collection</a>
+                <a class="button button--ghost-light" href="./product.html">Featured item</a>
+              </div>
             </div>
           </div>
         </section>
 
-        <section class="stats">
-          <div class="container stats__grid">
-            <div class="stat-card"><strong>16+</strong><span>Сумок у колекції</span></div>
-            <div class="stat-card"><strong>5K+</strong><span>Задоволених клієнтів</span></div>
-            <div class="stat-card"><strong>48Г</strong><span>Швидка доставка</span></div>
-            <div class="stat-card"><strong>14</strong><span>Днів на повернення</span></div>
+        <section class="benefits-marquee" aria-label="Store benefits">
+          <div class="benefits-marquee__track">
+            <span>Free shipping over 2000 грн</span>
+            <span>Нова пошта 1-3 дні</span>
+            <span>WooCommerce ready</span>
+            <span>New drop every week</span>
+            <span>KeyCRM / Torgsoft ready</span>
+            <span>Free shipping over 2000 грн</span>
+            <span>Нова пошта 1-3 дні</span>
+            <span>WooCommerce ready</span>
           </div>
         </section>
 
-        <section class="section">
+        <section class="section section--editorial-products">
+          <div class="container section__head section__head--centered">
+            <div>
+              <span class="section__eyebrow">Our bestsellers</span>
+              <h2>Перші моделі, вже додані на сайт</h2>
+            </div>
+          </div>
+          <div class="container product-grid product-grid--editorial">
+            <article class="product-card product-card--editorial"><div class="product-card__media"><img src="./assets/products/panama-zhak-mus-1.jpg" alt="Панама Жак Мюс лео" /></div><div class="product-card__content"><span class="product-card__badge product-card__badge--soft">Best seller</span><h3>Панама Жак Мюс</h3><div class="product-card__price">890 ₴ <small>котон / денім</small></div><a class="product-card__link" href="./product.html">View product</a></div></article>
+            <article class="product-card product-card--editorial"><div class="product-card__media"><img src="./assets/products/panama-lezo-1.jpg" alt="Панама Лезо синій денім" /></div><div class="product-card__content"><span class="product-card__badge product-card__badge--soft">New</span><h3>Панама Лезо</h3><div class="product-card__price">950 ₴ <small>денім</small></div><a class="product-card__link" href="./catalog.html">View product</a></div></article>
+            <article class="product-card product-card--editorial"><div class="product-card__media"><img src="./assets/products/panama-zhak-mus-5.jpg" alt="Панама Жак Мюс біла" /></div><div class="product-card__content"><span class="product-card__badge product-card__badge--soft">Essential</span><h3>Панама Пустишка</h3><div class="product-card__price">890 ₴ <small>котон / денім</small></div><a class="product-card__link" href="./catalog.html">View product</a></div></article>
+          </div>
+        </section>
+
+        <section class="section section--highlight section--editorial-quote">
           <div class="container section__head">
             <div>
-              <span class="section__eyebrow">Колекція</span>
-              <h2>Колекція жіночих сумок та аксесуарів</h2>
+              <span class="section__eyebrow">Soft luxury</span>
+              <h2>Мінімалістичний магазин, де головне це образ, текстура і сам товар</h2>
             </div>
-            <a class="section__link" href="./catalog.html">Усі товари</a>
-          </div>
-          <div class="container product-grid">
-            <article class="product-card"><div class="product-card__media product-card__media--1"><span class="product-card__badge">New</span></div><div class="product-card__content"><h3>Muse Mini</h3><div class="product-card__price">4 890 ₴</div><a class="product-card__link" href="./product.html">Переглянути</a></div></article>
-            <article class="product-card"><div class="product-card__media product-card__media--2"><span class="product-card__badge">Top</span></div><div class="product-card__content"><h3>Linea Tote</h3><div class="product-card__price">5 690 ₴</div><a class="product-card__link" href="./product.html">Переглянути</a></div></article>
-            <article class="product-card"><div class="product-card__media product-card__media--3"><span class="product-card__badge">Sale</span></div><div class="product-card__content"><h3>Velvet Form</h3><div class="product-card__price">3 790 ₴</div><a class="product-card__link" href="./product.html">Переглянути</a></div></article>
-            <article class="product-card"><div class="product-card__media product-card__media--4"><span class="product-card__badge">Popular</span></div><div class="product-card__content"><h3>Atelier Belt</h3><div class="product-card__price">1 490 ₴</div><a class="product-card__link" href="./product.html">Переглянути</a></div></article>
-          </div>
-        </section>
-
-        <section class="section section--highlight">
-          <div class="container section__head">
-            <div>
-              <span class="section__eyebrow">Відгуки</span>
-              <h2>Клієнтам подобається сервіс і чистий досвід покупки</h2>
-            </div>
-            <div class="rating-pill">4.9★ на основі 5000+ відгуків</div>
+            <div class="rating-pill">4.9★ на основі перших замовлень</div>
           </div>
           <div class="container review-slider js-review-slider">
             <article class="review-card"><div class="review-card__stars">★★★★★</div><p>Матеріал виглядає дуже дорого, а доставка приїхала швидше, ніж очікувала.</p><strong>Марія</strong></article>
@@ -126,7 +139,7 @@
           </div>
         </section>
 
-        <section class="section">
+        <section id="contacts" class="section">
           <div class="container section__head section__head--center">
             <span class="section__eyebrow">Особливості</span>
             <h2>Все, що робить магазин сильним для продажу</h2>
@@ -180,4 +193,3 @@
     <script src="./wp-content/themes/jojo-avoe/assets/js/theme.js"></script>
   </body>
   </html>
-
