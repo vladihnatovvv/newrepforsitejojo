@@ -24,7 +24,7 @@ import re
 from dataclasses import asdict, dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional, Sequence
+from typing import Dict, List, Optional, Sequence, Tuple
 
 from telethon import TelegramClient
 from telethon.errors import SessionPasswordNeededError
@@ -67,6 +67,8 @@ class ProductRecord:
     message_id: int
     date: str
     source_chat: str
+    topic_id: str = ""
+    topic_title: str = ""
     title: str = ""
     description: str = ""
     price: str = ""
@@ -84,6 +86,34 @@ class ProductRecord:
         payload = asdict(self)
         payload["photo_paths"] = "|".join(self.photo_paths)
         return payload
+
+    def to_woocommerce_row(self) -> Dict[str, str]:
+        category = self.category or self.topic_title
+        return {
+            "Type": "simple",
+            "SKU": self.sku,
+            "Name": self.title,
+            "Published": "1",
+            "Is featured?": "0",
+            "Visibility in catalog": "visible",
+            "Short description": self.description[:240],
+            "Description": self.description or self.raw_text,
+            "Tax status": "taxable",
+            "In stock?": "1" if self.availability != "backorder" else "0",
+            "Stock": "",
+            "Regular price": self.price,
+            "Sale price": "",
+            "Categories": category,
+            "Images": ", ".join(self.photo_paths),
+            "Attribute 1 name": "Колір",
+            "Attribute 1 value(s)": self.colors,
+            "Attribute 1 visible": "1" if self.colors else "0",
+            "Attribute 1 global": "1" if self.colors else "0",
+            "Attribute 2 name": "Розмір",
+            "Attribute 2 value(s)": self.sizes,
+            "Attribute 2 visible": "1" if self.sizes else "0",
+            "Attribute 2 global": "1" if self.sizes else "0",
+        }
 
 
 def parse_args() -> argparse.Namespace:
@@ -209,7 +239,41 @@ def build_source_url(chat: str, message: Message) -> str:
     return ""
 
 
-def parse_record(message: Message, chat_ref: str, media_paths: List[str]) -> ProductRecord:
+def get_topic_info(message: Message) -> Tuple[Optional[int], bool]:
+    reply_to = getattr(message, "reply_to", None)
+    if not reply_to:
+        return None, False
+
+    forum_topic = bool(getattr(reply_to, "forum_topic", False))
+    topic_id = getattr(reply_to, "reply_to_top_id", None)
+    if topic_id is None and forum_topic:
+        topic_id = getattr(reply_to, "reply_to_msg_id", None)
+
+    return topic_id, forum_topic
+
+
+def extract_topic_title(message: Message, raw_text: str) -> str:
+    action = getattr(message, "action", None)
+    title = clean_whitespace(getattr(action, "title", "") or "")
+    if title:
+        return title
+
+    lines = [line.strip() for line in raw_text.splitlines() if line.strip()]
+    if not lines:
+        return ""
+    first = lines[0]
+    if len(first) <= 80 and not looks_like_product(raw_text, bool(message.media)):
+        return first
+    return ""
+
+
+def parse_record(
+    message: Message,
+    chat_ref: str,
+    media_paths: List[str],
+    topic_id: Optional[int] = None,
+    topic_title: str = "",
+) -> ProductRecord:
     raw_text = clean_whitespace(message.message or "")
     lines = [line.strip() for line in raw_text.splitlines() if line.strip()]
     title = derive_title(lines)
@@ -230,6 +294,8 @@ def parse_record(message: Message, chat_ref: str, media_paths: List[str]) -> Pro
         message_id=message.id,
         date=message.date.isoformat(),
         source_chat=chat_ref,
+        topic_id=str(topic_id or ""),
+        topic_title=topic_title,
         title=title,
         description=derive_description(lines, title),
         price=price,
@@ -301,10 +367,12 @@ async def export_messages(args: argparse.Namespace) -> None:
     raw_messages_path = dirs["raw"] / "messages.jsonl"
     products_json_path = output_dir / "products.json"
     products_csv_path = output_dir / "products.csv"
+    woocommerce_csv_path = output_dir / "products_woocommerce.csv"
 
     records: List[ProductRecord] = []
     raw_count = 0
     raw_messages_path.write_text("", encoding="utf-8")
+    topic_titles: Dict[int, str] = {}
 
     async with client:
         async for message in client.iter_messages(
@@ -315,6 +383,12 @@ async def export_messages(args: argparse.Namespace) -> None:
             raw_count += 1
             raw_text = clean_whitespace(message.message or "")
             has_media = bool(message.media)
+            topic_id, forum_topic = get_topic_info(message)
+            explicit_topic_title = extract_topic_title(message, raw_text)
+            if forum_topic and topic_id and explicit_topic_title and topic_id not in topic_titles:
+                topic_titles[topic_id] = explicit_topic_title
+            elif explicit_topic_title and getattr(getattr(message, "action", None), "title", None):
+                topic_titles[message.id] = explicit_topic_title
 
             media_paths = await maybe_download_media(
                 client,
@@ -329,6 +403,9 @@ async def export_messages(args: argparse.Namespace) -> None:
                 "text": raw_text,
                 "has_media": has_media,
                 "media_paths": media_paths,
+                "topic_id": topic_id,
+                "forum_topic": forum_topic,
+                "topic_title_guess": explicit_topic_title,
             }
             with raw_messages_path.open("a", encoding="utf-8") as fh:
                 fh.write(json.dumps(raw_payload, ensure_ascii=False) + "\n")
@@ -338,7 +415,22 @@ async def export_messages(args: argparse.Namespace) -> None:
             if not args.include_non_product and not looks_like_product(raw_text, has_media):
                 continue
 
-            records.append(parse_record(message, args.chat, media_paths))
+            resolved_topic_title = topic_titles.get(topic_id or 0, "")
+            records.append(
+                parse_record(
+                    message,
+                    args.chat,
+                    media_paths,
+                    topic_id=topic_id,
+                    topic_title=resolved_topic_title,
+                )
+            )
+
+    for record in records:
+        if record.topic_id and not record.topic_title:
+            record.topic_title = topic_titles.get(int(record.topic_id), "")
+        if not record.category and record.topic_title:
+            record.category = record.topic_title
 
     with products_json_path.open("w", encoding="utf-8") as fh:
         json.dump([asdict(record) for record in records], fh, ensure_ascii=False, indent=2)
@@ -350,11 +442,21 @@ async def export_messages(args: argparse.Namespace) -> None:
         for record in records:
             writer.writerow(record.to_csv_row())
 
+    woocommerce_fieldnames = list(ProductRecord(0, "", "").to_woocommerce_row().keys())
+    with woocommerce_csv_path.open("w", encoding="utf-8", newline="") as fh:
+        writer = csv.DictWriter(fh, fieldnames=woocommerce_fieldnames)
+        writer.writeheader()
+        for record in records:
+            if not record.title:
+                continue
+            writer.writerow(record.to_woocommerce_row())
+
     print(f"Read {raw_count} messages")
     print(f"Extracted {len(records)} product-like records")
     print(f"Raw messages: {raw_messages_path}")
     print(f"Products JSON: {products_json_path}")
     print(f"Products CSV: {products_csv_path}")
+    print(f"WooCommerce CSV: {woocommerce_csv_path}")
     if args.download_media:
         print(f"Media dir: {dirs['media']}")
 

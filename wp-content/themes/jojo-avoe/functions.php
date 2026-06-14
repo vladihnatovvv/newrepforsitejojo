@@ -75,9 +75,9 @@ function jojo_avoe_default_mods(): array {
 	return array(
 		'phone'            => '+380 75 249 00 29',
 		'email'            => 'avoe.online@gmail.com',
-		'hero_eyebrow'     => __('Нова колекція', 'jojo-avoe'),
-		'hero_title'       => __('Мінімалістичні сумки та аксесуари', 'jojo-avoe'),
-		'hero_text'        => __('Елегантні моделі преміум якості для тих, хто цінує стиль, функціональність і чіткий сервіс.', 'jojo-avoe'),
+		'hero_eyebrow'     => __('DROP SS26', 'jojo-avoe'),
+		'hero_title'       => __('Панами та аксесуари з сильним силуетом', 'jojo-avoe'),
+		'hero_text'        => __('Сучасні панами JoJo у білому, денімі та акцентних кольорах. Магазин зібраний під швидкий вибір, WooCommerce і подальші інтеграції.', 'jojo-avoe'),
 		'shipping_note'    => __('Доставка по Україні 1-3 робочі дні', 'jojo-avoe'),
 		'about_title'      => __('Про бренд', 'jojo-avoe'),
 		'about_text'       => __('Ми підбираємо сумки та аксесуари з акцентом на якість, довговічність і сучасну форму. Магазин зібраний так, щоб клієнт швидко обирав, легко замовляв і отримував чесний сервіс.', 'jojo-avoe'),
@@ -161,24 +161,24 @@ function jojo_avoe_get_featured_products(int $limit = 6): array {
 function jojo_avoe_get_placeholder_products(): array {
 	return array(
 		array(
-			'title' => __('Сумка Muse Mini', 'jojo-avoe'),
-			'price' => '4 890',
+			'title' => __('Панама Жак Мюс', 'jojo-avoe'),
+			'price' => '890',
 			'badge' => __('New', 'jojo-avoe'),
 		),
 		array(
-			'title' => __('Шкіряний тоут Linea', 'jojo-avoe'),
-			'price' => '5 690',
+			'title' => __('Панама Лезо', 'jojo-avoe'),
+			'price' => '950',
 			'badge' => __('Top', 'jojo-avoe'),
 		),
 		array(
-			'title' => __('Клатч Velvet Form', 'jojo-avoe'),
-			'price' => '3 790',
-			'badge' => __('Sale', 'jojo-avoe'),
+			'title' => __('Панама Пустишка', 'jojo-avoe'),
+			'price' => '890',
+			'badge' => __('Popular', 'jojo-avoe'),
 		),
 		array(
-			'title' => __('Ремінь Atelier', 'jojo-avoe'),
-			'price' => '1 490',
-			'badge' => __('Popular', 'jojo-avoe'),
+			'title' => __('Скоро ще кольори', 'jojo-avoe'),
+			'price' => 'JoJo',
+			'badge' => __('Drop', 'jojo-avoe'),
 		),
 	);
 }

@@ -78,6 +78,9 @@ python3 -m http.server 4173
 - зберігає всі повідомлення у `JSONL`
 - опціонально завантажує фото
 - будує чорновий `products.csv` і `products.json`
+- зчитує `forum topics / гілки`, якщо група ведеться по темах
+- ставить назву гілки в поле категорії товару
+- готує окремий `products_woocommerce.csv`
 - намагається витягнути:
   - назву
   - ціну
@@ -142,8 +145,9 @@ python3 scripts/telegram_products_export.py \
 - `output/telegram_export/raw/messages.jsonl`
 - `output/telegram_export/products.json`
 - `output/telegram_export/products.csv`
+- `output/telegram_export/products_woocommerce.csv`
 - `output/telegram_export/media/` якщо ввімкнено завантаження фото
 
 ## 6. Важливе обмеження
 
-Якщо товари в Telegram оформлені дуже хаотично, скрипт витягне тільки чорнові дані. Це нормально: далі я можу допомогти перетворити `products.csv` у формат під імпорт `WooCommerce`.
+Якщо товари в Telegram оформлені дуже хаотично, скрипт витягне тільки чорнові дані. Але для вашого сценарію з гілками він тепер намагається брати назву `topic` як категорію, щоб підготувати CSV ближче до імпорту в `WooCommerce`.
