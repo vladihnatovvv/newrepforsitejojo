@@ -1,0 +1,5 @@
+Type,SKU,Name,Published,Is featured?,Visibility in catalog,Short description,Description,Date sale price starts,Date sale price ends,Tax status,In stock?,Stock,Regular price,Sale price,Categories,Images,Attribute 1 name,Attribute 1 value(s),Attribute 1 visible,Attribute 1 global
+simple,KEPI-001,Кепі Cotton,1,1,visible,"Кепі з котону","Матеріал: котон. Розмір: 58-59 см. Базова модель для щоденного носіння.",,,taxable,1,12,890,,"Головні убори > Кепі","https://example.com/images/kepi-cotton-1.jpg, https://example.com/images/kepi-cotton-2.jpg",Колір,"чорний, зелений, бордовий, бежевий",1,1
+simple,KHUSTKY-001,Хустка Urban,1,0,visible,"Хустка з напиленням","Аксесуар для міжсезоння. М'яка тканина, декілька базових кольорів.",,,taxable,1,8,690,,"Аксесуари > Хустки","https://example.com/images/khustka-urban-1.jpg",Колір,"сірий, шоколад, молочний",1,1
+simple,SUMKY-001,Сумка Muse Mini,1,1,visible,"Преміальна сумка","Компактна сумка для щоденного носіння. Жорстке дно, магнітна застібка.",,,taxable,1,6,4890,,"Сумки","https://example.com/images/muse-mini-1.jpg, https://example.com/images/muse-mini-2.jpg",Колір,"chocolate, ivory, black",1,1
+

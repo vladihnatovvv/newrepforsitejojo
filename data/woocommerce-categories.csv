@@ -1,0 +1,16 @@
+name,slug,parent,description
+Головні убори,golovni-ubory,,"Основна група головних уборів"
+Кепі,kepi,golovni-ubory,"Базова категорія кепі"
+Кепі-реглан,kepi-reglan,golovni-ubory,"Окрема модель кепі-реглан"
+Морячка,moryachka,golovni-ubory,"Категорія морячок"
+Кепки,kepky,golovni-ubory,"Класичні кепки"
+Солома,soloma,golovni-ubory,"Солом'яні моделі"
+Кепка-докерка,kepka-dokerka,golovni-ubory,"Кепки-докерки"
+Панами,panamy,golovni-ubory,"Панами"
+Аксесуари,aksesuary,,"Супутні аксесуари"
+Футляри,futlyary,aksesuary,"Футляри"
+Хустки,khustky,aksesuary,"Хустки"
+Окуляри,okulyary,aksesuary,"Окуляри"
+Сумки,sumky,,"Сумки"
+SALE,sale,,"Акційні товари"
+

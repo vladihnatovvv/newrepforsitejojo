@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AVOE Preview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../wp-content/themes/jojo-avoe/assets/css/main.css" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header">
+        <div class="container site-header__row">
+          <a class="brand-mark" href="./index.html"><span class="brand-mark__icon">A</span><span class="brand-mark__text">AVOE</span></a>
+          <nav class="site-nav">
+            <ul class="menu">
+              <li><a href="./catalog.html">Магазин</a></li>
+              <li><a href="./catalog.html">Каталог</a></li>
+              <li><a href="#about">Про нас</a></li>
+              <li><a href="#faq">Питання</a></li>
+            </ul>
+          </nav>
+          <div class="site-header__actions">
+            <a class="header-contact" href="tel:+380752490029">+380 75 249 00 29</a>
+            <button class="cart-pill js-cart-toggle" type="button" aria-expanded="false" aria-controls="mini-cart-panel"><span class="cart-pill__label">Кошик</span><span class="cart-pill__count">2</span></button>
+            <button class="menu-toggle js-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
+          </div>
+        </div>
+        <div id="mobile-menu" class="mobile-drawer" hidden>
+          <div class="mobile-drawer__inner">
+            <ul class="mobile-menu">
+              <li><a href="./catalog.html">Магазин</a></li>
+              <li><a href="./catalog.html">Каталог</a></li>
+              <li><a href="#about">Про нас</a></li>
+              <li><a href="#faq">Питання</a></li>
+            </ul>
+            <a class="mobile-drawer__contact" href="mailto:avoe.online@gmail.com">avoe.online@gmail.com</a>
+          </div>
+        </div>
+      </header>
+
+      <aside id="mini-cart-panel" class="mini-cart" aria-hidden="true">
+        <div class="mini-cart__overlay js-cart-toggle"></div>
+        <div class="mini-cart__panel">
+          <div class="mini-cart__header"><h2>Ваш кошик</h2><button class="mini-cart__close js-cart-toggle" type="button">×</button></div>
+          <div class="mini-cart__body">
+            <ul class="woocommerce-mini-cart">
+              <li class="woocommerce-mini-cart-item">
+                <div class="product-card__media product-card__media--1" style="min-height:72px"></div>
+                <div><strong>Muse Mini</strong><div>1 × 4 890 ₴</div></div>
+              </li>
+              <li class="woocommerce-mini-cart-item">
+                <div class="product-card__media product-card__media--2" style="min-height:72px"></div>
+                <div><strong>Linea Tote</strong><div>1 × 5 690 ₴</div></div>
+              </li>
+            </ul>
+          </div>
+          <div class="mini-cart__footer">
+            <div class="mini-cart__total"><span>Всього</span><div class="mini-cart__total-value">10 580 ₴</div></div>
+            <div class="mini-cart__cta">
+              <a class="button button--ghost" href="./cart.html">До кошика</a>
+              <a class="button" href="./checkout.html">Оформити замовлення</a>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main id="primary" class="site-main">
+        <section class="hero">
+          <div class="container hero__grid">
+            <div class="hero__content">
+              <span class="hero__eyebrow">Нова колекція</span>
+              <h1>Мінімалістичні сумки та аксесуари</h1>
+              <p>Елегантні моделі преміум якості для тих, хто цінує стиль, функціональність і чіткий сервіс.</p>
+              <div class="hero__actions">
+                <a class="button" href="./catalog.html">Переглянути колекцію</a>
+                <a class="button button--ghost" href="#about">Дізнатися більше</a>
+              </div>
+            </div>
+            <div class="hero__visual" aria-hidden="true">
+              <div class="hero-bag hero-bag--large"></div>
+              <div class="hero-bag hero-bag--small"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="stats">
+          <div class="container stats__grid">
+            <div class="stat-card"><strong>16+</strong><span>Сумок у колекції</span></div>
+            <div class="stat-card"><strong>5K+</strong><span>Задоволених клієнтів</span></div>
+            <div class="stat-card"><strong>48Г</strong><span>Швидка доставка</span></div>
+            <div class="stat-card"><strong>14</strong><span>Днів на повернення</span></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container section__head">
+            <div>
+              <span class="section__eyebrow">Колекція</span>
+              <h2>Колекція жіночих сумок та аксесуарів</h2>
+            </div>
+            <a class="section__link" href="./catalog.html">Усі товари</a>
+          </div>
+          <div class="container product-grid">
+            <article class="product-card"><div class="product-card__media product-card__media--1"><span class="product-card__badge">New</span></div><div class="product-card__content"><h3>Muse Mini</h3><div class="product-card__price">4 890 ₴</div><a class="product-card__link" href="./product.html">Переглянути</a></div></article>
+            <article class="product-card"><div class="product-card__media product-card__media--2"><span class="product-card__badge">Top</span></div><div class="product-card__content"><h3>Linea Tote</h3><div class="product-card__price">5 690 ₴</div><a class="product-card__link" href="./product.html">Переглянути</a></div></article>
+            <article class="product-card"><div class="product-card__media product-card__media--3"><span class="product-card__badge">Sale</span></div><div class="product-card__content"><h3>Velvet Form</h3><div class="product-card__price">3 790 ₴</div><a class="product-card__link" href="./product.html">Переглянути</a></div></article>
+            <article class="product-card"><div class="product-card__media product-card__media--4"><span class="product-card__badge">Popular</span></div><div class="product-card__content"><h3>Atelier Belt</h3><div class="product-card__price">1 490 ₴</div><a class="product-card__link" href="./product.html">Переглянути</a></div></article>
+          </div>
+        </section>
+
+        <section class="section section--highlight">
+          <div class="container section__head">
+            <div>
+              <span class="section__eyebrow">Відгуки</span>
+              <h2>Клієнтам подобається сервіс і чистий досвід покупки</h2>
+            </div>
+            <div class="rating-pill">4.9★ на основі 5000+ відгуків</div>
+          </div>
+          <div class="container review-slider js-review-slider">
+            <article class="review-card"><div class="review-card__stars">★★★★★</div><p>Матеріал виглядає дуже дорого, а доставка приїхала швидше, ніж очікувала.</p><strong>Марія</strong></article>
+            <article class="review-card"><div class="review-card__stars">★★★★★</div><p>Товарні сторінки не перевантажені, оформлення займає хвилину.</p><strong>Ірина</strong></article>
+            <article class="review-card"><div class="review-card__stars">★★★★★</div><p>Сумка вживу виглядає ще сильніше, ніж на фото.</p><strong>Олена</strong></article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container section__head section__head--center">
+            <span class="section__eyebrow">Особливості</span>
+            <h2>Все, що робить магазин сильним для продажу</h2>
+          </div>
+          <div class="container features-grid">
+            <article class="feature-card"><h3>Преміум якість</h3><p>Матеріали, фурнітура і конструкція підібрані під довгий термін служби.</p></article>
+            <article class="feature-card"><h3>Швидка доставка</h3><p>Структура магазину вже підготовлена під Нову пошту та швидке оформлення.</p></article>
+            <article class="feature-card"><h3>Легке повернення</h3><p>Прозорі умови повернення, винесені в окремий інформаційний блок.</p></article>
+            <article class="feature-card"><h3>CRM і облік</h3><p>Тема спроектована так, щоб підключення keyCRM і Torgsoft не ламало UX.</p></article>
+          </div>
+        </section>
+
+        <section id="about" class="section section--split">
+          <div class="container about-grid">
+            <div class="about-grid__visual" aria-hidden="true"></div>
+            <div class="about-grid__content">
+              <span class="section__eyebrow">Про бренд</span>
+              <h2>Сайт, який продає без візуального шуму</h2>
+              <p>Ми підбираємо сумки та аксесуари з акцентом на якість, довговічність і сучасну форму. Магазин зібраний так, щоб клієнт швидко обирав, легко замовляв і отримував чесний сервіс.</p>
+              <div class="about-metrics">
+                <div><strong>SKU-ready</strong><span>Структура під артикул, залишок і варіації</span></div>
+                <div><strong>Woo + CRM</strong><span>Підготовка до статусів, синхронізацій і доставок</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" class="section">
+          <div class="container section__head section__head--center">
+            <span class="section__eyebrow">FAQ</span>
+            <h2>Часті запитання покупців</h2>
+          </div>
+          <div class="container faq-list">
+            <details class="faq-item"><summary>Чи є доставка Новою поштою?</summary><p>Так. Магазин спроектований під інтеграцію з Новою поштою: місто, відділення або поштомат, а також майбутнє автоматичне створення ТТН.</p></details>
+            <details class="faq-item"><summary>Чи можна повернути товар?</summary><p>Так, протягом 14 днів за умови збереження товарного вигляду та комплектації.</p></details>
+            <details class="faq-item"><summary>Як перевіряється наявність?</summary><p>Тема підготовлена під синхронізацію з обліком і CRM, тому актуальні залишки та статуси можуть підтягуватися автоматично.</p></details>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="container site-footer__grid">
+          <div class="site-footer__brand"><div class="site-footer__logo">AVOE</div><p>Преміум аксесуари для тих, хто цінує якість та стиль.</p></div>
+          <div class="site-footer__links"><h3>Швидкі посилання</h3><ul class="footer-menu"><li><a href="./catalog.html">Каталог</a></li><li><a href="./product.html">Товар</a></li><li><a href="./cart.html">Кошик</a></li><li><a href="./checkout.html">Checkout</a></li></ul></div>
+          <div class="site-footer__contacts"><h3>Зв'яжіться з нами</h3><a href="tel:+380752490029">+380 75 249 00 29</a><a href="mailto:avoe.online@gmail.com">avoe.online@gmail.com</a><span>Доставка по Україні 1-3 робочі дні</span></div>
+        </div>
+        <div class="container site-footer__bottom"><p>© 2026 AVOE. Всі права захищені.</p></div>
+      </footer>
+    </div>
+
+    <script src="../wp-content/themes/jojo-avoe/assets/js/theme.js"></script>
+  </body>
+  </html>
+
