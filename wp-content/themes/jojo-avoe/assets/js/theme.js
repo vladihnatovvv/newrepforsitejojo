@@ -1,4 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const ICONS = {
+    cart: `
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M6 7h12l-1 10H7L6 7Z"></path>
+        <path d="M9 7a3 3 0 0 1 6 0"></path>
+      </svg>
+    `,
+    search: `
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="11" cy="11" r="6"></circle>
+        <path d="m20 20-4.2-4.2"></path>
+      </svg>
+    `,
+    menu: `
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M4 7h16"></path>
+        <path d="M4 12h16"></path>
+        <path d="M4 17h16"></path>
+      </svg>
+    `,
+    close: `
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M6 6 18 18"></path>
+        <path d="M18 6 6 18"></path>
+      </svg>
+    `,
+    trash: `
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M3 6h18"></path>
+        <path d="M8 6V4h8v2"></path>
+        <path d="M19 6l-1 14H6L5 6"></path>
+        <path d="M10 11v5"></path>
+        <path d="M14 11v5"></path>
+      </svg>
+    `
+  };
+
   const shell = document.documentElement;
   const mobileMenu = document.getElementById("mobile-menu");
   const menuToggles = document.querySelectorAll(".js-menu-toggle");
@@ -8,6 +45,33 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeButtons = document.querySelectorAll(".mini-cart__close");
   const store = window.JOJO_STORE || null;
   const page = document.body.dataset.page || "";
+
+  const injectIcons = () => {
+    document.querySelectorAll(".cart-pill").forEach((button) => {
+      if (!button.querySelector(".icon-inline")) {
+        const icon = document.createElement("span");
+        icon.className = "icon-inline icon-inline--cart";
+        icon.innerHTML = ICONS.cart;
+        button.prepend(icon);
+      }
+    });
+
+    document.querySelectorAll(".header-search button[type='submit']").forEach((button) => {
+      button.classList.add("icon-button");
+      button.setAttribute("aria-label", "Знайти");
+      button.innerHTML = `<span class="icon-inline icon-inline--search">${ICONS.search}</span><span class="button-sr-only">Знайти</span>`;
+    });
+
+    document.querySelectorAll(".js-menu-toggle").forEach((button) => {
+      button.classList.add("icon-button", "icon-button--ghost");
+      button.innerHTML = `<span class="icon-inline icon-inline--menu">${ICONS.menu}</span><span class="button-sr-only">Меню</span>`;
+    });
+
+    document.querySelectorAll(".mini-cart__close").forEach((button) => {
+      button.classList.add("icon-button", "icon-button--ghost", "icon-button--close");
+      button.innerHTML = `<span class="icon-inline icon-inline--close">${ICONS.close}</span><span class="button-sr-only">Закрити</span>`;
+    });
+  };
 
   const toggleVisibility = (node, stateClass, expanded) => {
     if (!node) return false;
@@ -87,6 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   const query = (params.get("q") || "").trim().toLowerCase();
   const sort = params.get("sort") || "default";
+  const requestedCategorySlug = params.get("category") || "";
 
   const formatPrice = (value) => `${Number(value).toLocaleString("uk-UA")} ₴`;
   const escapeHtml = (value) =>
@@ -98,6 +163,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const buildProductUrl = (slug) => `./product.html?product=${encodeURIComponent(slug)}`;
   const buildSearchUrl = (term) => `./search.html?q=${encodeURIComponent(term)}`;
+  const buildCatalogUrl = ({ category = "", sortValue = "", queryValue = "" } = {}) => {
+    const next = new URL("./catalog.html", window.location.href);
+    if (category) next.searchParams.set("category", category);
+    if (sortValue && sortValue !== "default") next.searchParams.set("sort", sortValue);
+    if (queryValue) next.searchParams.set("q", queryValue);
+    return `${next.pathname}${next.search}`;
+  };
+
+  const categoryEntries = store.categories.flatMap((group) =>
+    (group.children || []).map((child) => ({
+      ...child,
+      parentName: group.name,
+      parentSlug: group.slug
+    }))
+  );
+  const categoryMap = new Map(categoryEntries.map((entry) => [entry.slug, entry]));
+  const defaultCategorySlug = categoryEntries.find((entry) => entry.active)?.slug || "";
+  const selectedCategorySlug = requestedCategorySlug || defaultCategorySlug;
+  const selectedCategory = categoryMap.get(selectedCategorySlug) || null;
 
   const matchesQuery = (product, term) => {
     if (!term) return true;
@@ -115,6 +199,13 @@ document.addEventListener("DOMContentLoaded", () => {
     return haystack.includes(term);
   };
 
+  const matchesCategory = (product, categorySlug) => {
+    if (!categorySlug) return true;
+    const category = categoryMap.get(categorySlug);
+    if (!category) return true;
+    return product.category.toLowerCase() === category.name.toLowerCase();
+  };
+
   const sortProducts = (products, sortValue) => {
     const sorted = [...products];
     if (sortValue === "price-asc") sorted.sort((a, b) => a.price - b.price);
@@ -123,10 +214,15 @@ document.addEventListener("DOMContentLoaded", () => {
     return sorted;
   };
 
-  const filteredProducts = sortProducts(
-    store.products.filter((product) => matchesQuery(product, query)),
-    sort
-  );
+  const getFilteredProducts = ({ term = query, sortValue = sort, categorySlug = selectedCategorySlug } = {}) =>
+    sortProducts(
+      store.products.filter(
+        (product) => matchesCategory(product, categorySlug) && matchesQuery(product, term)
+      ),
+      sortValue
+    );
+
+  const filteredProducts = getFilteredProducts();
 
   const renderProductCard = (product, { compact = false } = {}) => `
     <article class="product-card${compact ? "" : " product-card--editorial"}">
@@ -147,19 +243,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const list = document.querySelector("[data-mini-cart-items]");
     const total = document.querySelector(".mini-cart__total-value");
     if (list) {
-      list.innerHTML = cartItems
-        .map(
-          ({ product, quantity }) => `
-            <li class="woocommerce-mini-cart-item">
-              <img class="mini-cart-item__thumb" src="${product.images[0]}" alt="${escapeHtml(product.name)}" />
-              <div>
-                <strong>${escapeHtml(product.name)}</strong>
-                <div>${quantity} × ${formatPrice(product.price)}</div>
-              </div>
-            </li>
-          `
-        )
-        .join("");
+      list.innerHTML = cartItems.length
+        ? cartItems
+            .map(
+              ({ product, quantity }) => `
+                <li class="woocommerce-mini-cart-item">
+                  <img class="mini-cart-item__thumb" src="${product.images[0]}" alt="${escapeHtml(product.name)}" />
+                  <div class="mini-cart-item__content">
+                    <div class="mini-cart-item__row">
+                      <strong>${escapeHtml(product.name)}</strong>
+                      <button class="mini-cart-item__remove" type="button" data-remove-from-cart="${escapeHtml(product.slug)}" aria-label="Прибрати ${escapeHtml(product.name)} з кошика">
+                        <span class="icon-inline icon-inline--trash">${ICONS.trash}</span>
+                      </button>
+                    </div>
+                    <div>${quantity} × ${formatPrice(product.price)}</div>
+                  </div>
+                </li>
+              `
+            )
+            .join("")
+        : `<li class="mini-cart__empty">У кошику поки немає товарів.</li>`;
     }
     const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
     const orderTotal = cartItems.reduce((sum, item) => sum + item.quantity * item.product.price, 0);
@@ -167,6 +270,23 @@ document.addEventListener("DOMContentLoaded", () => {
       node.textContent = String(itemCount);
     });
     if (total) total.textContent = formatPrice(orderTotal);
+  };
+
+  const removeCartItem = (slug) => {
+    const index = cartItems.findIndex((item) => item.slug === slug);
+    if (index === -1) return;
+    cartItems.splice(index, 1);
+    renderMiniCart();
+    if (page === "cart") renderCart();
+    if (page === "checkout") renderCheckout();
+  };
+
+  const bindCartInteractions = () => {
+    document.addEventListener("click", (event) => {
+      const removeButton = event.target.closest("[data-remove-from-cart]");
+      if (!removeButton) return;
+      removeCartItem(removeButton.dataset.removeFromCart || "");
+    });
   };
 
   const bindSearchForms = () => {
@@ -215,12 +335,50 @@ document.addEventListener("DOMContentLoaded", () => {
   const renderHome = () => {
     const featuredNode = document.querySelector("[data-featured-products]");
     if (featuredNode) {
-      const featured = (store.featuredSlugs || [])
+      const curatedFeatured = (store.featuredSlugs || [])
         .map((slug) => map.get(slug))
         .filter(Boolean);
+      const featured =
+        curatedFeatured.length >= 4 ? curatedFeatured : store.products.slice(0, Math.min(store.products.length, 6));
       featuredNode.innerHTML = featured.map((product) => renderProductCard(product)).join("");
     }
     renderFaq();
+  };
+
+  const bindFeaturedSlider = () => {
+    const track = document.querySelector("[data-featured-products]");
+    const prevButton = document.querySelector("[data-featured-prev]");
+    const nextButton = document.querySelector("[data-featured-next]");
+    if (!track || !prevButton || !nextButton) return;
+
+    const applyFeaturedSliderLayout = () => {
+      const visibleItems = window.matchMedia("(max-width: 767px)").matches ? 1 : window.matchMedia("(max-width: 1100px)").matches ? 2 : 3;
+      const gap = 30;
+      track.style.display = "grid";
+      track.style.gridTemplateColumns = "none";
+      track.style.gridAutoFlow = "column";
+      track.style.gridAutoColumns =
+        visibleItems === 1 ? "100%" : visibleItems === 2 ? `calc((100% - ${gap}px) / 2)` : `calc((100% - ${gap * 2}px) / 3)`;
+      track.style.overflowX = "auto";
+      track.style.overflowY = "hidden";
+      track.style.scrollSnapType = "x mandatory";
+      track.style.scrollBehavior = "smooth";
+      track.style.width = "100%";
+    };
+
+    const scrollByPage = (direction) => {
+      const firstCard = track.querySelector(".product-card");
+      const cardWidth = firstCard ? firstCard.getBoundingClientRect().width : 0;
+      const gap = 30;
+      const visibleItems = window.matchMedia("(max-width: 767px)").matches ? 1 : window.matchMedia("(max-width: 1100px)").matches ? 2 : 3;
+      const distance = (cardWidth + gap) * visibleItems;
+      track.scrollBy({ left: distance * direction, behavior: "smooth" });
+    };
+
+    applyFeaturedSliderLayout();
+    prevButton.addEventListener("click", () => scrollByPage(-1));
+    nextButton.addEventListener("click", () => scrollByPage(1));
+    window.addEventListener("resize", applyFeaturedSliderLayout);
   };
 
   const renderCategoryNav = () => {
@@ -230,12 +388,12 @@ document.addEventListener("DOMContentLoaded", () => {
       .map(
         (group) => `
           <div class="catalog-tree__group">
-            <span class="catalog-tree__parent">${escapeHtml(group.name)}</span>
+            <span class="catalog-tree__parent${group.children.some((child) => child.slug === selectedCategorySlug) ? " is-active" : ""}">${escapeHtml(group.name)}</span>
             <div class="catalog-tree__children">
               ${group.children
                 .map(
                   (child) => `
-                    <a class="catalog-tree__child${child.active ? " is-active" : ""}" href="./catalog.html">${escapeHtml(child.name)}</a>
+                    <a class="catalog-tree__child${child.slug === selectedCategorySlug || (!selectedCategorySlug && child.active) ? " is-active" : ""}" href="${buildCatalogUrl({ category: child.slug, sortValue: sort, queryValue: query })}">${escapeHtml(child.name)}</a>
                   `
                 )
                 .join("")}
@@ -251,18 +409,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const countNode = document.querySelector("[data-catalog-count]");
     const emptyNode = document.querySelector("[data-catalog-empty]");
     const searchNode = document.querySelector("[data-catalog-query]");
+    const titleNode = document.querySelector("[data-catalog-title]");
+    const descriptionNode = document.querySelector("[data-catalog-description]");
+    const eyebrowNode = document.querySelector("[data-catalog-eyebrow]");
     const sortSelect = document.querySelector("[data-sort-select]");
     const liveSearchInput = document.querySelector("[data-live-search-input]");
+    const totalInScope = store.products.filter((product) =>
+      matchesCategory(product, selectedCategorySlug)
+    ).length;
+    const defaultTitle = selectedCategory ? `${selectedCategory.name} JoJo` : "Каталог JoJo";
+    const defaultDescription = selectedCategory
+      ? `Добірка товарів у категорії "${selectedCategory.name}". Пошук і сортування працюють у межах вибраного розділу.`
+      : "Оновлений каталог із фільтром, пошуком і тільки вашими товарами.";
 
     if (sortSelect) sortSelect.value = sort;
     if (liveSearchInput) liveSearchInput.value = query;
-    if (searchNode) searchNode.textContent = query;
+    if (searchNode) searchNode.textContent = query || "усі товари";
+    if (titleNode) titleNode.textContent = defaultTitle;
+    if (descriptionNode) descriptionNode.textContent = defaultDescription;
+    if (eyebrowNode && selectedCategory?.parentName) eyebrowNode.textContent = selectedCategory.parentName;
 
     if (catalogNode) {
       catalogNode.innerHTML = filteredProducts.map((product) => renderProductCard(product, { compact: true })).join("");
     }
     if (countNode) {
-      countNode.textContent = `Показано ${filteredProducts.length} з ${store.products.length} товарів`;
+      countNode.textContent = `Показано ${filteredProducts.length} з ${totalInScope} товарів`;
     }
     if (emptyNode) {
       emptyNode.hidden = filteredProducts.length > 0;
@@ -270,30 +441,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (sortSelect) {
       sortSelect.addEventListener("change", () => {
-        const next = new URL(window.location.href);
-        next.searchParams.set("sort", sortSelect.value);
-        if (!liveSearchInput?.value.trim()) {
-          next.searchParams.delete("q");
-        }
-        window.location.href = next.toString();
+        window.location.href = buildCatalogUrl({
+          category: selectedCategorySlug,
+          sortValue: sortSelect.value,
+          queryValue: liveSearchInput?.value.trim().toLowerCase() || ""
+        });
       });
     }
 
     if (liveSearchInput) {
       liveSearchInput.addEventListener("input", () => {
         const term = liveSearchInput.value.trim().toLowerCase();
-        const liveProducts = sortProducts(
-          store.products.filter((product) => matchesQuery(product, term)),
-          sortSelect ? sortSelect.value : sort
-        );
+        const liveProducts = getFilteredProducts({
+          term,
+          sortValue: sortSelect ? sortSelect.value : sort,
+          categorySlug: selectedCategorySlug
+        });
         if (catalogNode) {
           catalogNode.innerHTML = liveProducts.map((product) => renderProductCard(product, { compact: true })).join("");
         }
         if (countNode) {
-          countNode.textContent = `Показано ${liveProducts.length} з ${store.products.length} товарів`;
+          countNode.textContent = `Показано ${liveProducts.length} з ${totalInScope} товарів`;
         }
         if (emptyNode) emptyNode.hidden = liveProducts.length > 0;
-        if (searchNode) searchNode.textContent = term;
+        if (searchNode) searchNode.textContent = term || "усі товари";
       });
     }
   };
@@ -363,18 +534,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const cartTable = document.querySelector("[data-cart-items]");
     const totals = document.querySelectorAll("[data-order-total]");
     if (cartTable) {
-      cartTable.innerHTML = cartItems
-        .map(
-          ({ product, quantity }) => `
-            <tr>
-              <td class="product-name" data-title="Товар">${escapeHtml(product.name)}</td>
-              <td data-title="Ціна">${formatPrice(product.price)}</td>
-              <td data-title="Кількість"><input class="qty" type="number" value="${quantity}" min="1" /></td>
-              <td data-title="Разом">${formatPrice(product.price * quantity)}</td>
-            </tr>
-          `
-        )
-        .join("");
+      cartTable.innerHTML = cartItems.length
+        ? cartItems
+            .map(
+              ({ product, quantity }) => `
+                <tr>
+                  <td class="product-name" data-title="Товар">
+                    <div class="cart-line__name">
+                      <span>${escapeHtml(product.name)}</span>
+                      <button class="mini-cart-item__remove mini-cart-item__remove--table" type="button" data-remove-from-cart="${escapeHtml(product.slug)}" aria-label="Прибрати ${escapeHtml(product.name)} з кошика">
+                        <span class="icon-inline icon-inline--trash">${ICONS.trash}</span>
+                      </button>
+                    </div>
+                  </td>
+                  <td data-title="Ціна">${formatPrice(product.price)}</td>
+                  <td data-title="Кількість"><input class="qty" type="number" value="${quantity}" min="1" /></td>
+                  <td data-title="Разом">${formatPrice(product.price * quantity)}</td>
+                </tr>
+              `
+            )
+            .join("")
+        : `<tr><td colspan="4">Кошик порожній.</td></tr>`;
     }
     const orderTotal = formatPrice(cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0));
     totals.forEach((node) => {
@@ -433,7 +613,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (body) body.innerHTML = `<p>${escapeHtml(content)}</p>`;
   };
 
+  injectIcons();
   bindSearchForms();
+  bindCartInteractions();
+  bindFeaturedSlider();
   fillStoreMeta();
   renderMiniCart();
 

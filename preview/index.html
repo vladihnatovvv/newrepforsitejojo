@@ -110,7 +110,15 @@
               <h2>Товари, які вже готові до показу клієнту</h2>
             </div>
           </div>
-          <div class="container product-grid product-grid--editorial" data-featured-products></div>
+          <div class="container featured-slider">
+            <div class="featured-slider__controls">
+              <button class="featured-slider__arrow" type="button" data-featured-prev aria-label="Попередні товари">Назад</button>
+              <button class="featured-slider__arrow" type="button" data-featured-next aria-label="Наступні товари">Вперед</button>
+            </div>
+            <div class="featured-slider__viewport">
+              <div class="product-grid product-grid--editorial featured-slider__track" data-featured-products></div>
+            </div>
+          </div>
         </section>
 
         <section class="section">

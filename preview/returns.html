@@ -3,18 +3,105 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Обмін та повернення — JoJo Studio</title>
+    <title>JoJo Studio — Обмін та повернення</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../wp-content/themes/jojo-avoe/assets/css/main.css" />
   </head>
   <body class="editorial-theme" data-page="policy" data-policy="returns">
-    <div class="site-shell site-shell--editorial">
-      <header class="site-header"><div class="container site-header__row"><a class="brand-mark" href="./index.html"><span class="brand-mark__icon">J</span><span class="brand-mark__text">JoJo</span></a><nav class="site-nav"><ul class="menu"><li><a href="./index.html">Головна</a></li><li><a href="./catalog.html">Каталог</a></li><li><a href="./delivery-payment.html">Доставка й оплата</a></li><li><a href="./contacts.html">Контакти</a></li></ul></nav><div class="site-header__actions"><form class="header-search" data-search-form><input type="search" placeholder="Пошук товарів" aria-label="Пошук товарів" data-search-input /><button type="submit">Знайти</button></form></div></div></header>
-      <section class="page-hero"><div class="container"><p class="section__eyebrow">Інформація</p><h1 data-policy-title></h1></div></section>
-      <main class="site-main"><div class="container"><article class="prose-article" data-policy-body></article></div></main>
-      <script src="./data/store.js"></script><script src="../wp-content/themes/jojo-avoe/assets/js/theme.js"></script>
+    <div class="site-shell">
+      <header class="site-header">
+        <div class="container site-header__row">
+          <a class="brand-mark" href="./index.html"><span class="brand-mark__icon">J</span><span class="brand-mark__text">JoJo</span></a>
+          <nav class="site-nav">
+            <ul class="menu">
+              <li><a href="./index.html">Головна</a></li>
+              <li><a href="./catalog.html">Каталог</a></li>
+              <li><a href="./delivery-payment.html">Доставка й оплата</a></li>
+              <li><a href="./contacts.html">Контакти</a></li>
+            </ul>
+          </nav>
+          <div class="site-header__actions">
+            <form class="header-search" data-search-form>
+              <input type="search" placeholder="Пошук товарів" aria-label="Пошук товарів" data-search-input />
+              <button type="submit">Знайти</button>
+            </form>
+            <button class="cart-pill js-cart-toggle" type="button" aria-expanded="false" aria-controls="mini-cart-panel"><span class="cart-pill__label">Кошик</span><span class="cart-pill__count">0</span></button>
+            <button class="menu-toggle js-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
+          </div>
+        </div>
+        <div id="mobile-menu" class="mobile-drawer" hidden>
+          <div class="mobile-drawer__inner">
+            <ul class="mobile-menu">
+              <li><a href="./index.html">Головна</a></li>
+              <li><a href="./catalog.html">Каталог</a></li>
+              <li><a href="./delivery-payment.html">Доставка й оплата</a></li>
+              <li><a href="./contacts.html">Контакти</a></li>
+              <li><a href="./search.html">Пошук</a></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+
+      <aside id="mini-cart-panel" class="mini-cart" aria-hidden="true">
+        <div class="mini-cart__overlay js-cart-toggle"></div>
+        <div class="mini-cart__panel">
+          <div class="mini-cart__header"><h2>Ваш кошик</h2><button class="mini-cart__close js-cart-toggle" type="button">×</button></div>
+          <div class="mini-cart__body"><ul class="woocommerce-mini-cart" data-mini-cart-items></ul></div>
+          <div class="mini-cart__footer">
+            <div class="mini-cart__total"><span>Всього</span><div class="mini-cart__total-value">0 ₴</div></div>
+            <div class="mini-cart__cta">
+              <a class="button button--ghost" href="./cart.html">До кошика</a>
+              <a class="button" href="./checkout.html">Оформити</a>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="site-main">
+        <section class="page-shell">
+          <div class="container">
+            <div class="page-hero page-hero--compact">
+              <span class="section__eyebrow">Інформація</span>
+              <h1 data-policy-title>Обмін та повернення</h1>
+              <p>Окрема сторінка з правилами повернення потрібна, щоб клієнт бачив умови ще до оформлення замовлення.</p>
+            </div>
+
+            <article class="prose-article prose-article--narrow" data-policy-body></article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="container site-footer__grid">
+          <div class="site-footer__brand">
+            <div class="site-footer__logo">JoJo Studio</div>
+            <p>Сучасний магазин аксесуарів з чистою структурою під каталог, checkout і майбутні інтеграції.</p>
+          </div>
+          <div class="site-footer__links">
+            <h3>Покупцю</h3>
+            <ul class="footer-menu">
+              <li><a href="./catalog.html">Каталог</a></li>
+              <li><a href="./search.html">Пошук</a></li>
+              <li><a href="./delivery-payment.html">Доставка й оплата</a></li>
+              <li><a href="./returns.html">Обмін та повернення</a></li>
+            </ul>
+          </div>
+          <div class="site-footer__links">
+            <h3>Інформація</h3>
+            <ul class="footer-menu">
+              <li><a href="./privacy-policy.html">Політика конфіденційності</a></li>
+              <li><a href="./terms.html">Умови користування</a></li>
+              <li><a href="./contacts.html">Контакти</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="container site-footer__bottom"><p>© 2026 JoJo Studio. Всі права захищені.</p></div>
+      </footer>
     </div>
+
+    <script src="./data/store.js"></script>
+    <script src="../wp-content/themes/jojo-avoe/assets/js/theme.js"></script>
   </body>
 </html>
