@@ -3,18 +3,97 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Панама Жак Мюс — JoJo Preview</title>
+    <title>Товар — JoJo Preview</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./wp-content/themes/jojo-avoe/assets/css/main.css" />
   </head>
-  <body class="editorial-theme">
+  <body class="editorial-theme" data-page="product" data-product="panama-zhak-mus">
     <div class="site-shell site-shell--editorial">
-      <header class="site-header"><div class="container site-header__row"><a class="brand-mark" href="./index.html"><span class="brand-mark__icon">A</span><span class="brand-mark__text">AVOE</span></a><nav class="site-nav"><ul class="menu"><li><a href="./catalog.html">Магазин</a></li><li><a href="./catalog.html">Каталог</a></li><li><a href="./index.html#about">Про нас</a></li><li><a href="./index.html#faq">Питання</a></li></ul></nav><div class="site-header__actions"><a class="header-contact" href="tel:+380752490029">+380 75 249 00 29</a><button class="cart-pill js-cart-toggle" type="button"><span class="cart-pill__label">Кошик</span><span class="cart-pill__count">2</span></button><button class="menu-toggle js-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button></div></div><div id="mobile-menu" class="mobile-drawer" hidden><div class="mobile-drawer__inner"><ul class="mobile-menu"><li><a href="./catalog.html">Магазин</a></li><li><a href="./catalog.html">Каталог</a></li><li><a href="./index.html#about">Про нас</a></li><li><a href="./index.html#faq">Питання</a></li></ul><a class="mobile-drawer__contact" href="mailto:avoe.online@gmail.com">avoe.online@gmail.com</a></div></div></header>
-      <section class="page-hero page-hero--compact"><div class="container"><div class="woocommerce-breadcrumb">Головна / Каталог / Панами / Панама Жак Мюс</div></div></section>
-      <main class="site-main"><div class="container woocommerce-shell"><section class="woocommerce"><div class="product"><div class="images"><div class="product-card__media" style="min-height:520px"><img src="./assets/products/panama-zhak-mus-1.jpg" alt="Панама Жак Мюс леопард" /></div></div><div class="summary"><h1 class="product_title">Панама Жак Мюс</h1><p class="price">890 ₴</p><div class="woocommerce-product-details__short-description"><p>Панама з котону та джинсу з рваним краєм і регулюванням позаду. Модель під повсякденний літній образ і яскраві акцентні луки.</p></div><form class="cart"><label for="color">Колір</label><select id="color"><option>чорний денім</option><option>блакитний денім</option><option>синій денім</option><option>чорний котон</option><option>білий</option><option>червоний</option><option>малиновий</option><option>бежевий</option><option>мокко</option><option>бірюзовий</option><option>лео</option></select><label for="qty">Кількість</label><input id="qty" class="qty" type="number" min="1" value="1" /><button class="single_add_to_cart_button" type="button">Додати в кошик</button></form><div class="woocommerce-tabs"><ul class="tabs"><li><a href="#details">Опис</a></li><li><a href="#delivery">Доставка</a></li></ul><div id="details" class="woocommerce-Tabs-panel"><p>Матеріал: котон та джинс. Розмір: 55-59 см. Посадка: регулюється позаду. Доступні кольори в денімі та котоні.</p><p><strong>Фото кольорів:</strong> лео, блакитний денім, графіт денім, білий, червоний, бежевий.</p></div><div id="delivery" class="woocommerce-Tabs-panel"><p>Доставка Новою поштою 1-3 дні. Повернення 14 днів. Магазин підготовлений під синхронізацію з keyCRM і Torgsoft.</p></div></div></div></div></section></div></main>
+      <header class="site-header">
+        <div class="container site-header__row">
+          <a class="brand-mark" href="./index.html"><span class="brand-mark__icon">J</span><span class="brand-mark__text">JoJo</span></a>
+          <nav class="site-nav">
+            <ul class="menu">
+              <li><a href="./index.html">Main</a></li>
+              <li><a href="./catalog.html">Catalog</a></li>
+              <li><a href="./checkout.html">Checkout</a></li>
+            </ul>
+          </nav>
+          <div class="site-header__actions">
+            <button class="cart-pill js-cart-toggle" type="button" aria-expanded="false" aria-controls="mini-cart-panel"><span class="cart-pill__label">Cart</span><span class="cart-pill__count">0</span></button>
+            <button class="menu-toggle js-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
+          </div>
+        </div>
+        <div id="mobile-menu" class="mobile-drawer" hidden>
+          <div class="mobile-drawer__inner">
+            <ul class="mobile-menu">
+              <li><a href="./index.html">Main</a></li>
+              <li><a href="./catalog.html">Catalog</a></li>
+              <li><a href="./checkout.html">Checkout</a></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+
+      <aside id="mini-cart-panel" class="mini-cart" aria-hidden="true">
+        <div class="mini-cart__overlay js-cart-toggle"></div>
+        <div class="mini-cart__panel">
+          <div class="mini-cart__header"><h2>Ваш кошик</h2><button class="mini-cart__close js-cart-toggle" type="button">×</button></div>
+          <div class="mini-cart__body">
+            <ul class="woocommerce-mini-cart" data-mini-cart-items></ul>
+          </div>
+          <div class="mini-cart__footer">
+            <div class="mini-cart__total"><span>Всього</span><div class="mini-cart__total-value">0 ₴</div></div>
+            <div class="mini-cart__cta">
+              <a class="button button--ghost" href="./cart.html">До кошика</a>
+              <a class="button" href="./checkout.html">Оформити</a>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <section class="page-hero page-hero--compact">
+        <div class="container">
+          <div class="woocommerce-breadcrumb" data-product-breadcrumb></div>
+        </div>
+      </section>
+
+      <main class="site-main">
+        <div class="container woocommerce-shell">
+          <section class="woocommerce">
+            <div class="product product--editorial">
+              <div class="images" data-product-gallery></div>
+              <div class="summary">
+                <h1 class="product_title" data-product-title></h1>
+                <p class="price" data-product-price></p>
+                <div class="woocommerce-product-details__short-description"><p data-product-summary></p></div>
+                <form class="cart">
+                  <label for="color">Колір</label>
+                  <select id="color" data-product-colors></select>
+                  <label for="qty">Кількість</label>
+                  <input id="qty" class="qty" type="number" min="1" value="1" />
+                  <button class="single_add_to_cart_button" type="button">Додати в кошик</button>
+                </form>
+                <div class="woocommerce-tabs">
+                  <ul class="tabs">
+                    <li><a href="#details">Опис</a></li>
+                    <li><a href="#delivery">Доставка</a></li>
+                  </ul>
+                  <div id="details" class="woocommerce-Tabs-panel" data-product-details></div>
+                  <div id="delivery" class="woocommerce-Tabs-panel">
+                    <p>Доставка Новою поштою 1-3 дні. Повернення 14 днів. Платіжний модуль можна буде додати пізніше без перебудови самої картки товару.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <script src="./data/store.js"></script>
       <script src="./wp-content/themes/jojo-avoe/assets/js/theme.js"></script>
     </div>
   </body>
-  </html>
+</html>

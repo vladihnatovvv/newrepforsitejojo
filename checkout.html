@@ -3,18 +3,101 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Checkout — AVOE Preview</title>
+    <title>Checkout — JoJo Preview</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./wp-content/themes/jojo-avoe/assets/css/main.css" />
   </head>
-  <body>
-    <div class="site-shell">
-      <header class="site-header"><div class="container site-header__row"><a class="brand-mark" href="./index.html"><span class="brand-mark__icon">A</span><span class="brand-mark__text">AVOE</span></a><nav class="site-nav"><ul class="menu"><li><a href="./catalog.html">Магазин</a></li><li><a href="./catalog.html">Каталог</a></li><li><a href="./index.html#about">Про нас</a></li><li><a href="./index.html#faq">Питання</a></li></ul></nav><div class="site-header__actions"><a class="header-contact" href="tel:+380752490029">+380 75 249 00 29</a><button class="cart-pill js-cart-toggle" type="button" aria-expanded="false" aria-controls="mini-cart-panel"><span class="cart-pill__label">Кошик</span><span class="cart-pill__count">2</span></button><button class="menu-toggle js-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button></div></div><div id="mobile-menu" class="mobile-drawer" hidden><div class="mobile-drawer__inner"><ul class="mobile-menu"><li><a href="./catalog.html">Магазин</a></li><li><a href="./catalog.html">Каталог</a></li><li><a href="./index.html#about">Про нас</a></li><li><a href="./index.html#faq">Питання</a></li></ul><a class="mobile-drawer__contact" href="mailto:avoe.online@gmail.com">avoe.online@gmail.com</a></div></div></header>
-      <section class="page-hero"><div class="container"><p class="section__eyebrow">Checkout</p><h1>Оформлення замовлення</h1></div></section>
-      <main class="site-main"><div class="container woocommerce-shell"><section class="woocommerce"><div id="customer_details" class="woocommerce-checkout-review-order"><h2>Контактні дані</h2><div class="checkout-fields"><input class="input-text" placeholder="Ім'я" /><input class="input-text" placeholder="Телефон" /><input class="input-text" placeholder="Email" /><input class="input-text" placeholder="Місто" /><select><option>Нова пошта</option><option>Самовивіз</option></select><input class="input-text" placeholder="Відділення / поштомат" /></div></div><div class="woocommerce-checkout-review-order"><h2 id="order_review_heading">Ваше замовлення</h2><table class="shop_table"><tbody><tr><td data-title="Товар">Muse Mini × 1</td><td data-title="Сума">4 890 ₴</td></tr><tr><td data-title="Товар">Linea Tote × 1</td><td data-title="Сума">5 690 ₴</td></tr><tr><td data-title="Разом"><strong>10 580 ₴</strong></td></tr></tbody></table><button class="button">Підтвердити замовлення</button></div></section></div></main>
+  <body class="editorial-theme" data-page="checkout">
+    <div class="site-shell site-shell--editorial">
+      <header class="site-header">
+        <div class="container site-header__row">
+          <a class="brand-mark" href="./index.html"><span class="brand-mark__icon">J</span><span class="brand-mark__text">JoJo</span></a>
+          <nav class="site-nav">
+            <ul class="menu">
+              <li><a href="./index.html">Main</a></li>
+              <li><a href="./catalog.html">Catalog</a></li>
+              <li><a href="./cart.html">Cart</a></li>
+            </ul>
+          </nav>
+          <div class="site-header__actions">
+            <button class="cart-pill js-cart-toggle" type="button" aria-expanded="false" aria-controls="mini-cart-panel"><span class="cart-pill__label">Cart</span><span class="cart-pill__count">0</span></button>
+            <button class="menu-toggle js-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
+          </div>
+        </div>
+        <div id="mobile-menu" class="mobile-drawer" hidden>
+          <div class="mobile-drawer__inner">
+            <ul class="mobile-menu">
+              <li><a href="./index.html">Main</a></li>
+              <li><a href="./catalog.html">Catalog</a></li>
+              <li><a href="./cart.html">Cart</a></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+
+      <aside id="mini-cart-panel" class="mini-cart" aria-hidden="true">
+        <div class="mini-cart__overlay js-cart-toggle"></div>
+        <div class="mini-cart__panel">
+          <div class="mini-cart__header"><h2>Ваш кошик</h2><button class="mini-cart__close js-cart-toggle" type="button">×</button></div>
+          <div class="mini-cart__body">
+            <ul class="woocommerce-mini-cart" data-mini-cart-items></ul>
+          </div>
+          <div class="mini-cart__footer">
+            <div class="mini-cart__total"><span>Всього</span><div class="mini-cart__total-value">0 ₴</div></div>
+            <div class="mini-cart__cta">
+              <a class="button button--ghost" href="./cart.html">До кошика</a>
+              <a class="button" href="./checkout.html">Оформити</a>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <section class="page-hero">
+        <div class="container">
+          <p class="section__eyebrow">Checkout</p>
+          <h1>Оформлення замовлення</h1>
+        </div>
+      </section>
+
+      <main class="site-main">
+        <div class="container woocommerce-shell">
+          <section class="woocommerce checkout-layout">
+            <div id="customer_details" class="woocommerce-checkout-review-order">
+              <h2>Контактні дані</h2>
+              <div class="checkout-fields">
+                <input class="input-text" placeholder="Ім'я" />
+                <input class="input-text" placeholder="Телефон" />
+                <input class="input-text" placeholder="Email" />
+                <input class="input-text" placeholder="Місто" />
+                <select>
+                  <option>Нова пошта</option>
+                  <option>Самовивіз</option>
+                </select>
+                <input class="input-text" placeholder="Відділення / поштомат" />
+              </div>
+              <div class="checkout-note">
+                <strong>Оплата</strong>
+                <p>Тут пізніше підключимо платіжний модуль. Структура сторінки вже під це підготовлена.</p>
+              </div>
+            </div>
+            <div class="woocommerce-checkout-review-order">
+              <h2 id="order_review_heading">Ваше замовлення</h2>
+              <table class="shop_table">
+                <tbody data-checkout-items></tbody>
+                <tfoot>
+                  <tr><td>Разом</td><td><strong data-checkout-total></strong></td></tr>
+                </tfoot>
+              </table>
+              <button class="button">Підтвердити замовлення</button>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <script src="./data/store.js"></script>
       <script src="./wp-content/themes/jojo-avoe/assets/js/theme.js"></script>
     </div>
   </body>
-  </html>
+</html>
