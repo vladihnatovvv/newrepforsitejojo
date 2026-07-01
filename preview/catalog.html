@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Каталог — JoJo Preview</title>
+    <title>Каталог — JoJo Studio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -16,22 +16,29 @@
           <a class="brand-mark" href="./index.html"><span class="brand-mark__icon">J</span><span class="brand-mark__text">JoJo</span></a>
           <nav class="site-nav">
             <ul class="menu">
-              <li><a href="./index.html">Main</a></li>
-              <li><a href="./catalog.html">Catalog</a></li>
-              <li><a href="./checkout.html">Checkout</a></li>
+              <li><a href="./index.html">Головна</a></li>
+              <li><a href="./catalog.html">Каталог</a></li>
+              <li><a href="./delivery-payment.html">Доставка й оплата</a></li>
+              <li><a href="./contacts.html">Контакти</a></li>
             </ul>
           </nav>
           <div class="site-header__actions">
-            <button class="cart-pill js-cart-toggle" type="button" aria-expanded="false" aria-controls="mini-cart-panel"><span class="cart-pill__label">Cart</span><span class="cart-pill__count">0</span></button>
+            <form class="header-search" data-search-form>
+              <input type="search" placeholder="Пошук товарів" aria-label="Пошук товарів" data-search-input />
+              <button type="submit">Знайти</button>
+            </form>
+            <button class="cart-pill js-cart-toggle" type="button" aria-expanded="false" aria-controls="mini-cart-panel"><span class="cart-pill__label">Кошик</span><span class="cart-pill__count">0</span></button>
             <button class="menu-toggle js-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
           </div>
         </div>
         <div id="mobile-menu" class="mobile-drawer" hidden>
           <div class="mobile-drawer__inner">
             <ul class="mobile-menu">
-              <li><a href="./index.html">Main</a></li>
-              <li><a href="./catalog.html">Catalog</a></li>
-              <li><a href="./checkout.html">Checkout</a></li>
+              <li><a href="./index.html">Головна</a></li>
+              <li><a href="./catalog.html">Каталог</a></li>
+              <li><a href="./delivery-payment.html">Доставка й оплата</a></li>
+              <li><a href="./contacts.html">Контакти</a></li>
+              <li><a href="./search.html">Пошук</a></li>
             </ul>
           </div>
         </div>
@@ -41,9 +48,7 @@
         <div class="mini-cart__overlay js-cart-toggle"></div>
         <div class="mini-cart__panel">
           <div class="mini-cart__header"><h2>Ваш кошик</h2><button class="mini-cart__close js-cart-toggle" type="button">×</button></div>
-          <div class="mini-cart__body">
-            <ul class="woocommerce-mini-cart" data-mini-cart-items></ul>
-          </div>
+          <div class="mini-cart__body"><ul class="woocommerce-mini-cart" data-mini-cart-items></ul></div>
           <div class="mini-cart__footer">
             <div class="mini-cart__total"><span>Всього</span><div class="mini-cart__total-value">0 ₴</div></div>
             <div class="mini-cart__cta">
@@ -57,11 +62,11 @@
       <section class="page-hero page-hero--shop">
         <div class="container page-hero__split">
           <div>
-            <p class="section__eyebrow">Catalog</p>
+            <p class="section__eyebrow">Каталог</p>
             <h1>Панами JoJo</h1>
-            <p>Каталог зібраний тільки з ваших товарів і готовий до подальшого наповнення без дублювання ручних правок.</p>
+            <p>Оновлений каталог із фільтром, пошуком і тільки вашими товарами.</p>
           </div>
-          <a class="button button--ghost" href="./checkout.html">Checkout flow</a>
+          <a class="button button--ghost" href="./checkout.html">Перейти до оформлення</a>
         </div>
       </section>
 
@@ -73,23 +78,38 @@
                 <span class="section__eyebrow">Категорії</span>
                 <nav class="catalog-tree" data-category-nav></nav>
               </div>
+              <div class="shop-panel">
+                <span class="section__eyebrow">Пошук</span>
+                <input class="catalog-search-input" type="search" placeholder="Шукати по назві, кольору, матеріалу" data-live-search-input />
+                <p class="catalog-search-note">Поточний запит: <strong data-catalog-query>усі товари</strong></p>
+              </div>
             </aside>
             <div class="shop-layout__content">
               <div class="section__head">
-                <p class="woocommerce-result-count" data-catalog-count>Показано 0 результатів</p>
+                <p class="woocommerce-result-count" data-catalog-count>Показано 0 товарів</p>
                 <div class="woocommerce-ordering">
-                  <select>
-                    <option>За замовчуванням</option>
-                    <option>Ціна: зростаюча</option>
-                    <option>Ціна: спадаюча</option>
+                  <select data-sort-select>
+                    <option value="default">За замовчуванням</option>
+                    <option value="price-asc">Ціна: зростаюча</option>
+                    <option value="price-desc">Ціна: спадаюча</option>
+                    <option value="name-asc">Назва: А-Я</option>
                   </select>
                 </div>
               </div>
               <div class="product-grid" data-catalog-grid></div>
+              <div class="catalog-empty" data-catalog-empty hidden>
+                <h3>Нічого не знайдено</h3>
+                <p>Спробуйте змінити запит або перейти на сторінку пошуку.</p>
+                <a class="button button--ghost" href="./search.html">Відкрити пошук</a>
+              </div>
             </div>
           </div>
         </div>
       </main>
+
+      <footer class="site-footer">
+        <div class="container site-footer__bottom"><p>© 2026 JoJo Studio. Каталог підготовлений для подальшого WooCommerce-наповнення.</p></div>
+      </footer>
 
       <script src="./data/store.js"></script>
       <script src="../wp-content/themes/jojo-avoe/assets/js/theme.js"></script>

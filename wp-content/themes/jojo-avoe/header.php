@@ -67,7 +67,7 @@
 		<div class="mini-cart__panel">
 			<div class="mini-cart__header">
 				<h2><?php esc_html_e('Ваш кошик', 'jojo-avoe'); ?></h2>
-				<button class="mini-cart__close js-cart-toggle" type="button" aria-label="<?php esc_attr_e('Close cart', 'jojo-avoe'); ?>">×</button>
+				<button class="mini-cart__close js-cart-toggle" type="button" aria-label="<?php esc_attr_e('Закрити кошик', 'jojo-avoe'); ?>">×</button>
 			</div>
 			<div class="mini-cart__body">
 				<?php if (jojo_avoe_is_woocommerce_active()) : ?>
@@ -88,4 +88,3 @@
 			</div>
 		</div>
 	</aside>
-

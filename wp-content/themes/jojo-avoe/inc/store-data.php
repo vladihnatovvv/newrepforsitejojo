@@ -11,33 +11,8 @@ function jojo_avoe_store_categories(): array {
 			'name'     => __('Головні убори', 'jojo-avoe'),
 			'slug'     => 'golovni-ubory',
 			'children' => array(
-				array('name' => __('Кепі', 'jojo-avoe'), 'slug' => 'kepi'),
-				array('name' => __('Кепі-реглан', 'jojo-avoe'), 'slug' => 'kepi-reglan'),
-				array('name' => __('Морячка', 'jojo-avoe'), 'slug' => 'moryachka'),
-				array('name' => __('Кепки', 'jojo-avoe'), 'slug' => 'kepky'),
-				array('name' => __('Солома', 'jojo-avoe'), 'slug' => 'soloma'),
-				array('name' => __('Кепка-докерка', 'jojo-avoe'), 'slug' => 'kepka-dokerka'),
 				array('name' => __('Панами', 'jojo-avoe'), 'slug' => 'panamy'),
 			),
-		),
-		array(
-			'name'     => __('Аксесуари', 'jojo-avoe'),
-			'slug'     => 'aksesuary',
-			'children' => array(
-				array('name' => __('Футляри', 'jojo-avoe'), 'slug' => 'futlyary'),
-				array('name' => __('Хустки', 'jojo-avoe'), 'slug' => 'khustky'),
-				array('name' => __('Окуляри', 'jojo-avoe'), 'slug' => 'okulyary'),
-			),
-		),
-		array(
-			'name'     => __('Сумки', 'jojo-avoe'),
-			'slug'     => 'sumky',
-			'children' => array(),
-		),
-		array(
-			'name'     => __('SALE', 'jojo-avoe'),
-			'slug'     => 'sale',
-			'children' => array(),
 		),
 	);
 }
@@ -83,7 +58,7 @@ function jojo_avoe_render_category_nav(): void {
 	$categories = jojo_avoe_store_categories();
 	$current    = function_exists('is_product_category') && is_product_category() ? get_queried_object() : null;
 	?>
-	<nav class="catalog-tree" aria-label="<?php esc_attr_e('Catalog categories', 'jojo-avoe'); ?>">
+	<nav class="catalog-tree" aria-label="<?php esc_attr_e('Категорії каталогу', 'jojo-avoe'); ?>">
 		<?php foreach ($categories as $category) : ?>
 			<div class="catalog-tree__group">
 				<a class="catalog-tree__parent<?php echo ($current && isset($current->slug) && $current->slug === $category['slug']) ? ' is-active' : ''; ?>" href="<?php echo esc_url(jojo_avoe_category_url($category['slug'])); ?>">
@@ -103,4 +78,3 @@ function jojo_avoe_render_category_nav(): void {
 	</nav>
 	<?php
 }
-

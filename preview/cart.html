@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Кошик — JoJo Preview</title>
+    <title>Кошик — JoJo Studio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -16,22 +16,28 @@
           <a class="brand-mark" href="./index.html"><span class="brand-mark__icon">J</span><span class="brand-mark__text">JoJo</span></a>
           <nav class="site-nav">
             <ul class="menu">
-              <li><a href="./index.html">Main</a></li>
-              <li><a href="./catalog.html">Catalog</a></li>
-              <li><a href="./checkout.html">Checkout</a></li>
+              <li><a href="./index.html">Головна</a></li>
+              <li><a href="./catalog.html">Каталог</a></li>
+              <li><a href="./delivery-payment.html">Доставка й оплата</a></li>
+              <li><a href="./contacts.html">Контакти</a></li>
             </ul>
           </nav>
           <div class="site-header__actions">
-            <button class="cart-pill js-cart-toggle" type="button" aria-expanded="false" aria-controls="mini-cart-panel"><span class="cart-pill__label">Cart</span><span class="cart-pill__count">0</span></button>
+            <form class="header-search" data-search-form>
+              <input type="search" placeholder="Пошук товарів" aria-label="Пошук товарів" data-search-input />
+              <button type="submit">Знайти</button>
+            </form>
+            <button class="cart-pill js-cart-toggle" type="button" aria-expanded="false" aria-controls="mini-cart-panel"><span class="cart-pill__label">Кошик</span><span class="cart-pill__count">0</span></button>
             <button class="menu-toggle js-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
           </div>
         </div>
         <div id="mobile-menu" class="mobile-drawer" hidden>
           <div class="mobile-drawer__inner">
             <ul class="mobile-menu">
-              <li><a href="./index.html">Main</a></li>
-              <li><a href="./catalog.html">Catalog</a></li>
-              <li><a href="./checkout.html">Checkout</a></li>
+              <li><a href="./index.html">Головна</a></li>
+              <li><a href="./catalog.html">Каталог</a></li>
+              <li><a href="./delivery-payment.html">Доставка й оплата</a></li>
+              <li><a href="./contacts.html">Контакти</a></li>
             </ul>
           </div>
         </div>
@@ -41,9 +47,7 @@
         <div class="mini-cart__overlay js-cart-toggle"></div>
         <div class="mini-cart__panel">
           <div class="mini-cart__header"><h2>Ваш кошик</h2><button class="mini-cart__close js-cart-toggle" type="button">×</button></div>
-          <div class="mini-cart__body">
-            <ul class="woocommerce-mini-cart" data-mini-cart-items></ul>
-          </div>
+          <div class="mini-cart__body"><ul class="woocommerce-mini-cart" data-mini-cart-items></ul></div>
           <div class="mini-cart__footer">
             <div class="mini-cart__total"><span>Всього</span><div class="mini-cart__total-value">0 ₴</div></div>
             <div class="mini-cart__cta">
@@ -56,8 +60,8 @@
 
       <section class="page-hero">
         <div class="container">
-          <p class="section__eyebrow">Cart</p>
-          <h1>Ваші товари</h1>
+          <p class="section__eyebrow">Кошик</p>
+          <h1>Ваше замовлення</h1>
         </div>
       </section>
 
@@ -86,6 +90,10 @@
           </div>
         </div>
       </main>
+
+      <footer class="site-footer">
+        <div class="container site-footer__bottom"><p>© 2026 JoJo Studio. Кошик підготовлений під живий WooCommerce checkout.</p></div>
+      </footer>
 
       <script src="./data/store.js"></script>
       <script src="../wp-content/themes/jojo-avoe/assets/js/theme.js"></script>

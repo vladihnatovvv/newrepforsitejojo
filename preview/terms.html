@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Товар — JoJo Studio</title>
+    <title>JoJo Studio — Умови користування</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../wp-content/themes/jojo-avoe/assets/css/main.css" />
   </head>
-  <body class="editorial-theme" data-page="product" data-product="panama-zhak-mus">
-    <div class="site-shell site-shell--editorial">
+  <body class="editorial-theme" data-page="policy" data-policy="terms">
+    <div class="site-shell">
       <header class="site-header">
         <div class="container site-header__row">
           <a class="brand-mark" href="./index.html"><span class="brand-mark__icon">J</span><span class="brand-mark__text">JoJo</span></a>
@@ -38,6 +38,7 @@
               <li><a href="./catalog.html">Каталог</a></li>
               <li><a href="./delivery-payment.html">Доставка й оплата</a></li>
               <li><a href="./contacts.html">Контакти</a></li>
+              <li><a href="./search.html">Пошук</a></li>
             </ul>
           </div>
         </div>
@@ -58,54 +59,48 @@
         </div>
       </aside>
 
-      <section class="page-hero page-hero--compact">
-        <div class="container">
-          <div class="woocommerce-breadcrumb" data-product-breadcrumb></div>
-        </div>
-      </section>
-
       <main class="site-main">
-        <div class="container woocommerce-shell">
-          <section class="woocommerce">
-            <div class="product product--editorial">
-              <div class="images" data-product-gallery></div>
-              <div class="summary">
-                <div class="product-label">Товар</div>
-                <h1 class="product_title" data-product-title></h1>
-                <p class="price" data-product-price></p>
-                <div class="product-article">Артикул: <strong data-product-article></strong></div>
-                <div class="woocommerce-product-details__short-description"><p data-product-summary></p></div>
-                <ul class="product-specs" data-product-specs></ul>
-                <form class="cart">
-                  <label for="color">Колір</label>
-                  <select id="color" data-product-colors></select>
-                  <label for="qty">Кількість</label>
-                  <input id="qty" class="qty" type="number" min="1" value="1" />
-                  <button class="single_add_to_cart_button" type="button">Додати в кошик</button>
-                </form>
-                <div class="woocommerce-tabs">
-                  <ul class="tabs">
-                    <li><a href="#details">Опис</a></li>
-                    <li><a href="#delivery">Доставка</a></li>
-                  </ul>
-                  <div id="details" class="woocommerce-Tabs-panel" data-product-details></div>
-                  <div id="delivery" class="woocommerce-Tabs-panel">
-                    <p>Доставка Новою поштою 1-3 дні. Менеджер уточнює деталі замовлення після оформлення.</p>
-                    <p>Онлайн-оплата буде підключена окремим платіжним модулем без зміни структури сторінки.</p>
-                  </div>
-                </div>
-              </div>
+        <section class="page-shell">
+          <div class="container">
+            <div class="page-hero page-hero--compact">
+              <span class="section__eyebrow">Юридична інформація</span>
+              <h1 data-policy-title>Умови користування</h1>
+              <p>Технічна сторінка для правил користування сайтом, обробки замовлень та подальшого підключення оплати.</p>
             </div>
-          </section>
-        </div>
+            <article class="prose-article" data-policy-body></article>
+          </div>
+        </section>
       </main>
 
       <footer class="site-footer">
-        <div class="container site-footer__bottom"><p>© 2026 JoJo Studio. Картка товару готова під WooCommerce-логіку.</p></div>
+        <div class="container site-footer__grid">
+          <div class="site-footer__brand">
+            <div class="site-footer__logo">JoJo Studio</div>
+            <p>Сучасний магазин аксесуарів з чистою структурою під каталог, checkout і майбутні інтеграції.</p>
+          </div>
+          <div class="site-footer__links">
+            <h3>Покупцю</h3>
+            <ul class="footer-menu">
+              <li><a href="./catalog.html">Каталог</a></li>
+              <li><a href="./search.html">Пошук</a></li>
+              <li><a href="./delivery-payment.html">Доставка й оплата</a></li>
+              <li><a href="./returns.html">Обмін та повернення</a></li>
+            </ul>
+          </div>
+          <div class="site-footer__links">
+            <h3>Інформація</h3>
+            <ul class="footer-menu">
+              <li><a href="./privacy-policy.html">Політика конфіденційності</a></li>
+              <li><a href="./terms.html">Умови користування</a></li>
+              <li><a href="./contacts.html">Контакти</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="container site-footer__bottom"><p>© 2026 JoJo Studio. Всі права захищені.</p></div>
       </footer>
-
-      <script src="./data/store.js"></script>
-      <script src="../wp-content/themes/jojo-avoe/assets/js/theme.js"></script>
     </div>
+
+    <script src="./data/store.js"></script>
+    <script src="../wp-content/themes/jojo-avoe/assets/js/theme.js"></script>
   </body>
 </html>

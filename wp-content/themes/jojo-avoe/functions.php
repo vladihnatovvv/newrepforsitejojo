@@ -33,8 +33,8 @@ function jojo_avoe_setup(): void {
 	add_theme_support('wc-product-gallery-slider');
 
 	register_nav_menus(array(
-		'primary' => __('Primary Menu', 'jojo-avoe'),
-		'footer'  => __('Footer Menu', 'jojo-avoe'),
+		'primary' => __('Головне меню', 'jojo-avoe'),
+		'footer'  => __('Меню в підвалі', 'jojo-avoe'),
 	));
 }
 add_action('after_setup_theme', 'jojo_avoe_setup');
@@ -75,13 +75,13 @@ function jojo_avoe_default_mods(): array {
 	return array(
 		'phone'            => '+380 75 249 00 29',
 		'email'            => 'avoe.online@gmail.com',
-		'hero_eyebrow'     => __('DROP SS26', 'jojo-avoe'),
+		'hero_eyebrow'     => __('НОВА КОЛЕКЦІЯ', 'jojo-avoe'),
 		'hero_title'       => __('Панами JoJo у сучасній editorial подачі', 'jojo-avoe'),
 		'hero_text'        => __('Сайт зібраний так, щоб клієнту було легко додавати нові товари, а магазину легко рости в WooCommerce, доставці та подальшому підключенні платіжки.', 'jojo-avoe'),
 		'shipping_note'    => __('Доставка по Україні 1-3 робочі дні', 'jojo-avoe'),
 		'about_title'      => __('Про бренд', 'jojo-avoe'),
 		'about_text'       => __('Ми підбираємо сумки та аксесуари з акцентом на якість, довговічність і сучасну форму. Магазин зібраний так, щоб клієнт швидко обирав, легко замовляв і отримував чесний сервіс.', 'jojo-avoe'),
-		'footer_tagline'   => __('Преміум аксесуари для тих, хто цінує якість та стиль.', 'jojo-avoe'),
+		'footer_tagline'   => __('Сучасні аксесуари для тих, хто цінує якість та стиль.', 'jojo-avoe'),
 		'instagram_handle' => '@avoe.store',
 	);
 }
@@ -93,20 +93,20 @@ function jojo_avoe_get_mod(string $key): string {
 
 function jojo_avoe_customize_register(WP_Customize_Manager $wp_customize): void {
 	$wp_customize->add_section('jojo_avoe_store_identity', array(
-		'title'    => __('Store Identity', 'jojo-avoe'),
+		'title'    => __('Налаштування магазину', 'jojo-avoe'),
 		'priority' => 30,
 	));
 
 	$fields = array(
-		'phone'          => __('Phone', 'jojo-avoe'),
+		'phone'          => __('Телефон', 'jojo-avoe'),
 		'email'          => __('Email', 'jojo-avoe'),
-		'hero_eyebrow'   => __('Hero Eyebrow', 'jojo-avoe'),
-		'hero_title'     => __('Hero Title', 'jojo-avoe'),
-		'hero_text'      => __('Hero Text', 'jojo-avoe'),
-		'shipping_note'  => __('Shipping Note', 'jojo-avoe'),
-		'about_title'    => __('About Title', 'jojo-avoe'),
-		'about_text'     => __('About Text', 'jojo-avoe'),
-		'footer_tagline' => __('Footer Tagline', 'jojo-avoe'),
+		'hero_eyebrow'   => __('Підзаголовок hero-блоку', 'jojo-avoe'),
+		'hero_title'     => __('Заголовок hero-блоку', 'jojo-avoe'),
+		'hero_text'      => __('Текст hero-блоку', 'jojo-avoe'),
+		'shipping_note'  => __('Примітка про доставку', 'jojo-avoe'),
+		'about_title'    => __('Заголовок блоку "Про бренд"', 'jojo-avoe'),
+		'about_text'     => __('Текст блоку "Про бренд"', 'jojo-avoe'),
+		'footer_tagline' => __('Підпис у футері', 'jojo-avoe'),
 	);
 
 	foreach ($fields as $field_key => $label) {
@@ -163,17 +163,17 @@ function jojo_avoe_get_placeholder_products(): array {
 		array(
 			'title' => __('Панама Жак Мюс', 'jojo-avoe'),
 			'price' => '890',
-			'badge' => __('Best seller', 'jojo-avoe'),
+			'badge' => __('Хіт продажу', 'jojo-avoe'),
 		),
 		array(
 			'title' => __('Панама Лезо', 'jojo-avoe'),
 			'price' => '950',
-			'badge' => __('New', 'jojo-avoe'),
+			'badge' => __('Нове', 'jojo-avoe'),
 		),
 		array(
 			'title' => __('Панама Пустишка', 'jojo-avoe'),
 			'price' => '890',
-			'badge' => __('Essential', 'jojo-avoe'),
+			'badge' => __('База сезону', 'jojo-avoe'),
 		),
 	);
 }
@@ -257,7 +257,7 @@ function jojo_avoe_theme_logo(): string {
 		return wp_kses_post(get_custom_logo());
 	}
 
-	return '<a class="brand-mark" href="' . esc_url(home_url('/')) . '"><span class="brand-mark__icon">A</span><span class="brand-mark__text">AVOE</span></a>';
+	return '<a class="brand-mark" href="' . esc_url(home_url('/')) . '"><span class="brand-mark__icon">J</span><span class="brand-mark__text">JoJo</span></a>';
 }
 
 function jojo_avoe_before_main_content(): void {

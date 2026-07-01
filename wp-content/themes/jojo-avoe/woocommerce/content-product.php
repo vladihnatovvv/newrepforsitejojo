@@ -15,15 +15,15 @@ if (! $product || ! $product->is_visible()) {
 
 $badges = array();
 if ($product->is_featured()) {
-	$badges[] = __('Top', 'jojo-avoe');
+	$badges[] = __('Хіт', 'jojo-avoe');
 }
 if ($product->is_on_sale()) {
-	$badges[] = __('Sale', 'jojo-avoe');
+	$badges[] = __('Акція', 'jojo-avoe');
 }
 if (empty($badges) && $product->get_date_created()) {
 	$diff = time() - $product->get_date_created()->getTimestamp();
 	if ($diff < MONTH_IN_SECONDS * 3) {
-		$badges[] = __('New', 'jojo-avoe');
+		$badges[] = __('Нове', 'jojo-avoe');
 	}
 }
 ?>
@@ -44,4 +44,3 @@ if (empty($badges) && $product->get_date_created()) {
 		<a class="product-card__link" href="<?php the_permalink(); ?>"><?php esc_html_e('Переглянути', 'jojo-avoe'); ?></a>
 	</div>
 </li>
-

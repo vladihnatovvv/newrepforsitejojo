@@ -36,7 +36,7 @@ $faq_items         = jojo_avoe_faq_items();
 			<div class="stat-card"><strong>3</strong><span><?php esc_html_e('Товари вже додані', 'jojo-avoe'); ?></span></div>
 			<div class="stat-card"><strong>11+</strong><span><?php esc_html_e('Кольорів у варіаціях', 'jojo-avoe'); ?></span></div>
 			<div class="stat-card"><strong>48Г</strong><span><?php esc_html_e('Швидка доставка', 'jojo-avoe'); ?></span></div>
-			<div class="stat-card"><strong>Ready</strong><span><?php esc_html_e('Під WooCommerce та оплату', 'jojo-avoe'); ?></span></div>
+			<div class="stat-card"><strong>Готово</strong><span><?php esc_html_e('Під WooCommerce та оплату', 'jojo-avoe'); ?></span></div>
 		</div>
 	</section>
 
@@ -97,7 +97,7 @@ $faq_items         = jojo_avoe_faq_items();
 		<div class="container features-grid">
 			<article class="feature-card"><h3><?php esc_html_e('Тільки ваші товари', 'jojo-avoe'); ?></h3><p><?php esc_html_e('У fallback-каталозі залишені лише надані вами моделі без зайвих демо-позицій.', 'jojo-avoe'); ?></p></article>
 			<article class="feature-card"><h3><?php esc_html_e('Швидке наповнення', 'jojo-avoe'); ?></h3><p><?php esc_html_e('Нові товари можна додавати централізовано без ручного дублювання контенту по сторінках.', 'jojo-avoe'); ?></p></article>
-			<article class="feature-card"><h3><?php esc_html_e('Checkout ready', 'jojo-avoe'); ?></h3><p><?php esc_html_e('Сторінка оформлення вже підготовлена під доставку, контакти і майбутній платіжний модуль.', 'jojo-avoe'); ?></p></article>
+			<article class="feature-card"><h3><?php esc_html_e('Готово до оформлення', 'jojo-avoe'); ?></h3><p><?php esc_html_e('Сторінка оформлення вже підготовлена під доставку, контакти і майбутній платіжний модуль.', 'jojo-avoe'); ?></p></article>
 			<article class="feature-card"><h3><?php esc_html_e('CRM і облік', 'jojo-avoe'); ?></h3><p><?php esc_html_e('Структура не конфліктує з подальшим підключенням keyCRM, Torgsoft та іншими інтеграціями.', 'jojo-avoe'); ?></p></article>
 		</div>
 	</section>
@@ -110,7 +110,7 @@ $faq_items         = jojo_avoe_faq_items();
 				<h2><?php esc_html_e('Сайт, який продає без візуального шуму', 'jojo-avoe'); ?></h2>
 				<p><?php echo esc_html(jojo_avoe_get_mod('about_text')); ?></p>
 				<div class="about-metrics">
-					<div><strong>SKU-ready</strong><span><?php esc_html_e('Структура під артикул, залишок і варіації', 'jojo-avoe'); ?></span></div>
+					<div><strong>SKU</strong><span><?php esc_html_e('Структура під артикул, залишок і варіації', 'jojo-avoe'); ?></span></div>
 					<div><strong>Woo + CRM</strong><span><?php esc_html_e('Підготовка до статусів, синхронізацій і доставок', 'jojo-avoe'); ?></span></div>
 				</div>
 			</div>
