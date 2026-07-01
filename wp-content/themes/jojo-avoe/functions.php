@@ -76,8 +76,8 @@ function jojo_avoe_default_mods(): array {
 		'phone'            => '+380 75 249 00 29',
 		'email'            => 'avoe.online@gmail.com',
 		'hero_eyebrow'     => __('DROP SS26', 'jojo-avoe'),
-		'hero_title'       => __('Панами та аксесуари з сильним силуетом', 'jojo-avoe'),
-		'hero_text'        => __('Сучасні панами JoJo у білому, денімі та акцентних кольорах. Магазин зібраний під швидкий вибір, WooCommerce і подальші інтеграції.', 'jojo-avoe'),
+		'hero_title'       => __('Панами JoJo у сучасній editorial подачі', 'jojo-avoe'),
+		'hero_text'        => __('Сайт зібраний так, щоб клієнту було легко додавати нові товари, а магазину легко рости в WooCommerce, доставці та подальшому підключенні платіжки.', 'jojo-avoe'),
 		'shipping_note'    => __('Доставка по Україні 1-3 робочі дні', 'jojo-avoe'),
 		'about_title'      => __('Про бренд', 'jojo-avoe'),
 		'about_text'       => __('Ми підбираємо сумки та аксесуари з акцентом на якість, довговічність і сучасну форму. Магазин зібраний так, щоб клієнт швидко обирав, легко замовляв і отримував чесний сервіс.', 'jojo-avoe'),
@@ -163,22 +163,17 @@ function jojo_avoe_get_placeholder_products(): array {
 		array(
 			'title' => __('Панама Жак Мюс', 'jojo-avoe'),
 			'price' => '890',
-			'badge' => __('New', 'jojo-avoe'),
+			'badge' => __('Best seller', 'jojo-avoe'),
 		),
 		array(
 			'title' => __('Панама Лезо', 'jojo-avoe'),
 			'price' => '950',
-			'badge' => __('Top', 'jojo-avoe'),
+			'badge' => __('New', 'jojo-avoe'),
 		),
 		array(
 			'title' => __('Панама Пустишка', 'jojo-avoe'),
 			'price' => '890',
-			'badge' => __('Popular', 'jojo-avoe'),
-		),
-		array(
-			'title' => __('Скоро ще кольори', 'jojo-avoe'),
-			'price' => 'JoJo',
-			'badge' => __('Drop', 'jojo-avoe'),
+			'badge' => __('Essential', 'jojo-avoe'),
 		),
 	);
 }
