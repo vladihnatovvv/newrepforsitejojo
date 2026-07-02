@@ -45,6 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeButtons = document.querySelectorAll(".mini-cart__close");
   const store = window.JOJO_STORE || null;
   const page = document.body.dataset.page || "";
+  const desktopSearchMedia = window.matchMedia("(min-width: 1101px)");
+  const buildSearchUrl = (term) => `./search.html?q=${encodeURIComponent(term)}`;
 
   const injectIcons = () => {
     document.querySelectorAll(".cart-pill").forEach((button) => {
@@ -71,6 +73,21 @@ document.addEventListener("DOMContentLoaded", () => {
       button.classList.add("icon-button", "icon-button--ghost", "icon-button--close");
       button.innerHTML = `<span class="icon-inline icon-inline--close">${ICONS.close}</span><span class="button-sr-only">Закрити</span>`;
     });
+  };
+
+  const ensureMobileSearch = () => {
+    if (!mobileMenu) return;
+    const drawerInner = mobileMenu.querySelector(".mobile-drawer__inner");
+    if (!drawerInner || drawerInner.querySelector("[data-mobile-search]")) return;
+    const mobileSearch = document.createElement("form");
+    mobileSearch.className = "header-search header-search--mobile";
+    mobileSearch.setAttribute("data-search-form", "");
+    mobileSearch.setAttribute("data-mobile-search", "true");
+    mobileSearch.innerHTML = `
+      <input type="search" placeholder="Пошук товарів" aria-label="Пошук товарів" data-search-input />
+      <button type="submit">Знайти</button>
+    `;
+    drawerInner.prepend(mobileSearch);
   };
 
   const toggleVisibility = (node, stateClass, expanded) => {
@@ -141,6 +158,97 @@ document.addEventListener("DOMContentLoaded", () => {
     slider.setAttribute("tabindex", "0");
   }
 
+  const bindHeaderSearchUi = () => {
+    const desktopSearchForms = [...document.querySelectorAll(".header-search:not(.header-search--mobile)")];
+
+    const syncSearchState = () => {
+      const desktopMode = desktopSearchMedia.matches;
+      desktopSearchForms.forEach((form) => {
+        const input = form.querySelector("[data-search-input]");
+        if (!input) return;
+        const hasValue = Boolean(input.value.trim());
+        form.classList.toggle("is-collapsed", desktopMode && !hasValue);
+        form.classList.toggle("is-open", desktopMode && hasValue);
+        form.dataset.expanded = desktopMode && hasValue ? "true" : "false";
+      });
+    };
+
+    desktopSearchForms.forEach((form) => {
+      const input = form.querySelector("[data-search-input]");
+      const submitButton = form.querySelector("button[type='submit']");
+      if (!input || !submitButton) return;
+
+      const openSearch = () => {
+        if (!desktopSearchMedia.matches) return;
+        form.classList.add("is-open");
+        form.classList.remove("is-collapsed");
+        form.dataset.expanded = "true";
+      };
+
+      const closeSearch = ({ force = false } = {}) => {
+        if (!desktopSearchMedia.matches) {
+          form.classList.remove("is-open", "is-collapsed");
+          form.dataset.expanded = "false";
+          return;
+        }
+        if (!force && input.value.trim()) return;
+        form.classList.remove("is-open");
+        form.classList.add("is-collapsed");
+        form.dataset.expanded = "false";
+      };
+
+      submitButton.addEventListener("click", (event) => {
+        if (!desktopSearchMedia.matches) return;
+        if (form.dataset.expanded !== "true") {
+          event.preventDefault();
+          openSearch();
+          requestAnimationFrame(() => input.focus());
+        }
+      });
+
+      input.addEventListener("focus", openSearch);
+      input.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") return;
+        input.value = "";
+        closeSearch({ force: true });
+        submitButton.focus();
+      });
+
+      input.addEventListener("blur", () => {
+        window.setTimeout(() => {
+          if (form.contains(document.activeElement)) return;
+          closeSearch();
+        }, 120);
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!desktopSearchMedia.matches || form.contains(event.target)) return;
+        closeSearch();
+      });
+    });
+
+    desktopSearchMedia.addEventListener("change", syncSearchState);
+    syncSearchState();
+  };
+
+  const bindSearchForms = () => {
+    document.querySelectorAll("[data-search-form]").forEach((form) => {
+      if (form.dataset.searchBound === "true") return;
+      form.dataset.searchBound = "true";
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const input = form.querySelector("[data-search-input]");
+        const term = input ? input.value.trim() : "";
+        window.location.href = buildSearchUrl(term);
+      });
+    });
+  };
+
+  ensureMobileSearch();
+  injectIcons();
+  bindHeaderSearchUi();
+  bindSearchForms();
+
   if (!store) return;
 
   const map = new Map(store.products.map((product) => [product.slug, product]));
@@ -162,7 +270,6 @@ document.addEventListener("DOMContentLoaded", () => {
       .replaceAll('"', "&quot;");
 
   const buildProductUrl = (slug) => `./product.html?product=${encodeURIComponent(slug)}`;
-  const buildSearchUrl = (term) => `./search.html?q=${encodeURIComponent(term)}`;
   const buildCatalogUrl = ({ category = "", sortValue = "", queryValue = "" } = {}) => {
     const next = new URL("./catalog.html", window.location.href);
     if (category) next.searchParams.set("category", category);
@@ -289,17 +396,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  const bindSearchForms = () => {
-    document.querySelectorAll("[data-search-form]").forEach((form) => {
-      form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const input = form.querySelector("[data-search-input]");
-        const term = input ? input.value.trim() : "";
-        window.location.href = buildSearchUrl(term);
-      });
-    });
-  };
-
   const fillStoreMeta = () => {
     document.querySelectorAll("[data-store-phone]").forEach((node) => {
       node.textContent = store.meta.phone;
@@ -311,6 +407,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     document.querySelectorAll("[data-store-instagram]").forEach((node) => {
       node.textContent = store.meta.instagram;
+      if (node.tagName === "A") {
+        const handle = store.meta.instagram.replace(/^@/, "");
+        node.href = `https://instagram.com/${handle}`;
+        node.target = "_blank";
+        node.rel = "noreferrer";
+      }
     });
     document.querySelectorAll("[data-shipping-note]").forEach((node) => {
       node.textContent = store.meta.shippingNote;
@@ -613,8 +715,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (body) body.innerHTML = `<p>${escapeHtml(content)}</p>`;
   };
 
-  injectIcons();
-  bindSearchForms();
   bindCartInteractions();
   bindFeaturedSlider();
   fillStoreMeta();

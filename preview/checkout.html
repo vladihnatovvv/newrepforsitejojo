@@ -58,50 +58,141 @@
         </div>
       </aside>
 
-      <section class="page-hero">
-        <div class="container">
-          <p class="section__eyebrow">Оформлення</p>
-          <h1>Оформлення замовлення</h1>
-        </div>
-      </section>
-
       <main class="site-main">
-        <div class="container woocommerce-shell">
-          <section class="woocommerce checkout-layout">
-            <div id="customer_details" class="woocommerce-checkout-review-order">
-              <h2>Контактні дані</h2>
-              <div class="checkout-fields">
-                <input class="input-text" placeholder="Ім'я" />
-                <input class="input-text" placeholder="Телефон" />
-                <input class="input-text" placeholder="Email" />
-                <input class="input-text" placeholder="Місто" />
-                <select>
-                  <option>Нова пошта</option>
-                  <option>Самовивіз</option>
-                </select>
-                <input class="input-text" placeholder="Відділення / поштомат" />
-              </div>
-              <div class="checkout-note">
-                <strong>Оплата</strong>
-                <p>Тут пізніше підключимо платіжний модуль. Структура сторінки вже під це підготовлена і не потребуватиме повної переробки.</p>
-              </div>
+        <section class="page-shell">
+          <div class="container">
+            <div class="page-hero page-hero--compact checkout-hero">
+              <span class="section__eyebrow">Оформлення</span>
+              <h1>Оформлення замовлення</h1>
+              <p>Швидке оформлення з доставкою Новою поштою. Платіжний модуль додамо окремо, але структура сторінки вже готова під інтеграцію.</p>
             </div>
-            <div class="woocommerce-checkout-review-order">
-              <h2 id="order_review_heading">Ваше замовлення</h2>
-              <table class="shop_table">
-                <tbody data-checkout-items></tbody>
-                <tfoot>
-                  <tr><td>Разом</td><td><strong data-checkout-total></strong></td></tr>
-                </tfoot>
-              </table>
-              <button class="button">Підтвердити замовлення</button>
-            </div>
-          </section>
-        </div>
-      </main>
 
+            <div class="woocommerce-shell">
+              <section class="woocommerce checkout-layout checkout-layout--editorial">
+                <div id="customer_details" class="woocommerce-checkout-review-order checkout-card checkout-card--form">
+                  <div class="checkout-card__header">
+                    <h2>Контактні дані</h2>
+                    <p>Заповніть коротку форму, щоб менеджер зміг швидко підтвердити замовлення.</p>
+                  </div>
+
+                  <div class="checkout-section">
+                    <span class="checkout-section__label">Покупець</span>
+                    <div class="checkout-fields">
+                      <label class="checkout-field">
+                        <span>Ім'я</span>
+                        <input class="input-text" placeholder="Ваше ім'я" />
+                      </label>
+                      <label class="checkout-field">
+                        <span>Телефон</span>
+                        <input class="input-text" placeholder="+380" />
+                      </label>
+                      <label class="checkout-field">
+                        <span>Email</span>
+                        <input class="input-text" placeholder="example@gmail.com" />
+                      </label>
+                      <label class="checkout-field">
+                        <span>Місто</span>
+                        <input class="input-text" placeholder="Київ" />
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="checkout-section">
+                    <span class="checkout-section__label">Доставка</span>
+                    <div class="checkout-fields checkout-fields--shipping">
+                      <label class="checkout-field">
+                        <span>Служба доставки</span>
+                        <select>
+                          <option>Нова пошта</option>
+                          <option>Самовивіз</option>
+                        </select>
+                      </label>
+                      <label class="checkout-field">
+                        <span>Відділення / поштомат</span>
+                        <input class="input-text" placeholder="Номер відділення або поштомату" />
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="checkout-note">
+                    <strong>Оплата</strong>
+                    <p>Тут пізніше підключимо платіжний модуль. Поточна сторінка вже підготовлена так, щоб інтеграція з’явилася без повної переробки дизайну.</p>
+                  </div>
+                </div>
+
+                <div class="woocommerce-checkout-review-order checkout-card checkout-card--summary">
+                  <div class="checkout-card__header">
+                    <h2 id="order_review_heading">Ваше замовлення</h2>
+                    <p>Перевірте товари перед підтвердженням.</p>
+                  </div>
+
+                  <table class="shop_table checkout-summary-table">
+                    <tbody data-checkout-items></tbody>
+                    <tfoot>
+                      <tr><td>Разом</td><td><strong data-checkout-total></strong></td></tr>
+                    </tfoot>
+                  </table>
+
+                  <div class="checkout-summary-note">
+                    <span>Доставка 1-3 дні</span>
+                    <span>Підтвердження менеджером</span>
+                  </div>
+
+                  <button class="button checkout-submit">Підтвердити замовлення</button>
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+      </main>
       <footer class="site-footer">
-        <div class="container site-footer__bottom"><p>© 2026 JoJo Studio. Checkout підготовлений під доставку й майбутню онлайн-оплату.</p></div>
+        <div class="container">
+          <div class="site-footer__grid">
+            <div class="site-footer__brand">
+              <div class="site-footer__brand-top">
+                <span class="site-footer__brand-icon">J</span>
+                <div>
+                  <div class="site-footer__logo">JoJo</div>
+                  <p class="site-footer__tag">Сучасний магазин аксесуарів</p>
+                </div>
+              </div>
+              <p>Чистий каталог, швидке оформлення замовлення і готова база під WooCommerce, оплату та подальші інтеграції.</p>
+              <a class="site-footer__cta" href="./catalog.html">Перейти в каталог</a>
+            </div>
+            <div class="site-footer__links">
+              <h3>Каталог</h3>
+              <ul class="footer-menu">
+                <li><a href="./catalog.html">Усі товари</a></li>
+                <li><a href="./search.html">Пошук</a></li>
+                <li><a href="./product.html?product=panama-zhak-mus">Хіти сезону</a></li>
+              </ul>
+            </div>
+            <div class="site-footer__links">
+              <h3>Покупцю</h3>
+              <ul class="footer-menu">
+                <li><a href="./delivery-payment.html">Доставка й оплата</a></li>
+                <li><a href="./returns.html">Обмін та повернення</a></li>
+                <li><a href="./terms.html">Умови користування</a></li>
+                <li><a href="./privacy-policy.html">Політика конфіденційності</a></li>
+              </ul>
+            </div>
+            <div class="site-footer__contacts">
+              <h3>Контакти</h3>
+              <a href="#" data-store-phone></a>
+              <a href="#" data-store-email></a>
+              <a href="#" data-store-instagram></a>
+              <p data-shipping-note></p>
+            </div>
+          </div>
+          <div class="site-footer__bottom">
+            <p>© 2026 JoJo Studio. Усі права захищені.</p>
+            <div class="site-footer__bottom-links">
+              <a href="./contacts.html">Контакти</a>
+              <a href="./cart.html">Кошик</a>
+              <a href="./checkout.html">Оформлення</a>
+            </div>
+          </div>
+        </div>
       </footer>
 
       <script src="./data/store.js"></script>
